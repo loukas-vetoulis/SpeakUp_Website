@@ -1,0 +1,37 @@
+:root {
+    /* PALETTE */
+    --purple-dark: #4a148c;
+    --purple-mid: #7b1fa2;
+    --purple-light: #d1c4e9;
+    --bg-light: #f4f0ff;
+    --white: #ffffff;
+    
+    /* SPACING */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 48px;
+    --space-xl: 80px;
+
+    /* CARDS */
+    --card-width: 260px;
+    --card-height: 340px;
+    
+    /* ANIMATIONS & SHADOWS (NEW!) */
+    /* Smoother, heavier easing */
+    --ease-premium: cubic-bezier(0.25, 1, 0.35, 1); 
+    /* Bouncy easing for hover states */
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Multi-layered purple glow shadow */
+    --shadow-premium: 0 20px 40px rgba(0,0,0,0.3), 0 0 40px rgba(123, 31, 162, 0.4);
+    /* Subtle base shadow */
+    --shadow-base: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --card-width: 400px; 
+        --card-height: 550px; 
+    }
+}

@@ -1,0 +1,146 @@
+/* --- SPONSORS --- */
+.sponsors-bar {
+    background: white; padding: var(--space-md) 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;
+    width: 100%;
+}
+.sponsor-img { height: 40px; filter: grayscale(100%); opacity: 0.6; transition: 0.4s var(--ease-premium); }
+.sponsor-img:hover { filter: grayscale(0%); opacity: 1; transform: translateY(-2px); }
+
+/* --- CAROUSEL CONTAINER --- */
+.carousel-section {
+    background: radial-gradient(circle at 50% 50%, #ba68c8 0%, #4a148c 100%);
+    padding: var(--space-xl) 0; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; min-height: 50vh;
+    /* Add perspective for 3D card tilts */
+    perspective: 1000px;
+}
+.carousel-container {
+    display: flex; gap: var(--space-md); overflow-x: auto;
+    padding: var(--space-md) calc(50% - var(--card-width)/2);
+    scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: auto; z-index: 10;
+    /* Ensure 3D space is preserved */
+    transform-style: preserve-3d;
+}
+.carousel-container::-webkit-scrollbar { display: none; }
+
+/* --- THE PREMIUM CARD --- */
+.card {
+    flex: 0 0 var(--card-width); height: var(--card-height); border-radius: 24px;
+    position: relative; scroll-snap-align: center;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-md);
+    background-size: cover; background-position: center; overflow: hidden; 
+    
+    /* Cursor: Default arrow for side cards */
+    cursor: default; 
+    
+    /* Base State (Inactive) */
+    transform: scale(0.9) rotateY(0deg); /* Reset rotation */
+    transition: all 0.6s var(--ease-premium);
+    box-shadow: var(--shadow-base);
+    /* Important for smooth 3D effect */
+    backface-visibility: hidden; 
+}
+
+/* THE NEW "TINT" OVERLAY (Deep Purple Gradient, not yellow) */
+.card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    /* A rich, deep purple gradient veil */
+    background: linear-gradient(to bottom, rgba(74, 20, 140, 0.7), rgba(74, 20, 140, 0.9));
+    opacity: 1;
+    transition: opacity 0.6s var(--ease-premium);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* HOVER ON SIDE CARD (Playful Tilt) */
+.card:not(.active):hover::after {
+    opacity: 0.2; /* Reveal most of the image, keep slight tint */
+}
+.card:not(.active):hover {
+    /* Slight 3D tilt towards viewer */
+    transform: scale(0.92) rotateY(-5deg);
+    z-index: 5;
+    cursor: pointer; /* Show hand to indicate it can be moved */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* --- ACTIVE STATE (The Hero) --- */
+.card.active {
+    transform: scale(1.0) rotateY(0deg); 
+    /* PREMIUM GLOW SHADOW */
+    box-shadow: var(--shadow-premium);
+    z-index: 10;
+    border: 1px solid rgba(255,255,255,0.3); /* Brighter border */
+    /* Cursor: Hand for active card (Link) */
+    cursor: pointer;
+}
+/* Fully reveal image on active card */
+.card.active::after { opacity: 0; }
+
+/* Extra pop on hover for the active card */
+.card.active:hover {
+     transform: scale(1.02);
+}
+
+
+/* Text Overlay (Bottom gradient for readability) */
+.card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); z-index: 2; pointer-events: none; transition: 0.6s ease;}
+.card.active::before { height: 70%; /* Larger gradient on active */ }
+
+.card h3 { position: relative; z-index: 3; color: white; font-size: 2rem; line-height: 0.9; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.card h3 span { display: block; font-size: 0.9rem; font-weight: 600; letter-spacing: 2px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
+
+.card-team { background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); }
+.card-events { background-image: url('https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); }
+.card-club { background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); }
+
+/* ARROWS (Punchier Hover) */
+.nav-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); width: 64px; height: 64px;
+    border-radius: 50%; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    color: white; cursor: pointer; z-index: 20; 
+    transition: all 0.4s var(--ease-bounce); /* Bouncy transition */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.nav-arrow:hover {
+    background: white; color: var(--purple-dark); 
+    transform: translateY(-50%) scale(1.15) rotate(0deg);
+    box-shadow: 0 0 40px rgba(255,255,255,0.5);
+}
+.nav-arrow:active { transform: translateY(-50%) scale(0.95); } /* Click feedback */
+.nav-left { left: var(--space-md); } .nav-right { right: var(--space-md); }
+
+/* --- CALENDAR --- */
+.calendar-section {
+    background: var(--bg-light); padding: 80px 20px; 
+    text-align: center; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.calendar-content {
+    position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center;
+}
+.deco-circle { position: absolute; border-radius: 50%; background: var(--purple-dark); opacity: 0.8; mix-blend-mode: multiply; }
+.c1 { width: 40px; height: 40px; top: 30px; left: 20px; }
+.c2 { width: 60px; height: 60px; top: 20px; right: 100px; }
+.c3 { width: 120px; height: 120px; bottom: -30px; left: -30px; }
+.c4 { width: 150px; height: 150px; top: 30%; right: -50px; opacity: 0.6; }
+
+.countdown-container {
+    background: var(--purple-dark); border-radius: 60px; padding: 25px 50px;
+    display: inline-flex; gap: 25px; color: white; position: relative; z-index: 2;
+    box-shadow: var(--shadow-premium);
+}
+.time-val { font-size: 1.8rem; font-weight: 800; }
+.time-label { font-size: 0.7rem; opacity: 0.9; text-transform: uppercase; margin-top: 5px; font-weight: 600; letter-spacing: 1px; }
+.calendar-link { display: inline-block; margin-top: 30px; color: var(--purple-dark); text-decoration: none; font-weight: 700; border-bottom: 2px solid transparent; transition: border 0.3s; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;}
+.calendar-link:hover { border-bottom: 2px solid var(--purple-dark); }
+
+@media (min-width: 1024px) {
+    .nav-left { left: var(--space-xl); } .nav-right { right: var(--space-xl); }
+    .card h3 { font-size: 3rem; } .card h3 span { font-size: 1.1rem; }
+    .time-val { font-size: 3rem; }
+}
