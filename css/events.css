@@ -1,0 +1,210 @@
+/* --- LAYOUT & HEADER --- */
+.events-page-section {
+    padding: var(--space-xl) var(--space-md);
+    background-color: var(--bg-light); /* Matches index background */
+    min-height: 100vh;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto; margin-right: auto;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--purple-dark);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* --- THE GRID (Mobile First) --- */
+.events-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 Column Mobile */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+/* TABLET (2 Columns) */
+@media (min-width: 768px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+/* LAPTOP (3 Columns) */
+@media (min-width: 1024px) {
+    .events-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- PREMIUM CARD DESIGN --- */
+.event-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Base Shadow - Subtle */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: all 0.5s var(--ease-premium);
+    cursor: default;
+}
+
+/* HOVER: Lift & Glow */
+.event-card:hover {
+    transform: translateY(-10px);
+    /* The Purple Glow */
+    box-shadow: 0 20px 40px rgba(74, 20, 140, 0.15), 0 0 0 1px rgba(74, 20, 140, 0.1);
+}
+
+/* 1. MEDIA AREA */
+.card-media {
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease; /* Slow cinematic zoom */
+}
+
+/* Hover Zoom Effect */
+.event-card:hover .card-media img {
+    transform: scale(1.1);
+}
+
+/* Glass Date Badge */
+.glass-date {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 60px; height: 70px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.glass-date .day {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--purple-dark);
+    line-height: 1;
+}
+
+.glass-date .month {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--purple-mid);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* Category Tag */
+.category-tag {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: rgba(74, 20, 140, 0.9); /* Dark Purple */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+/* 2. BODY AREA */
+.card-body {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}
+
+.meta-info {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    transition: color 0.3s;
+}
+
+.event-card:hover .card-title {
+    color: var(--purple-dark);
+}
+
+/* 3. SIGN UP BUTTON (The Playful Part) */
+.card-btn {
+    margin-top: auto;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-light); /* Light Purple bg */
+    padding: 10px 10px 10px 20px;
+    border-radius: 50px;
+    color: var(--purple-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s var(--ease-bounce);
+    overflow: hidden;
+}
+
+.icon-circle {
+    width: 36px; height: 36px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.4s var(--ease-bounce), background 0.3s;
+}
+
+/* Button Hover State */
+.card-btn:hover {
+    background: var(--purple-dark); /* Fills with purple */
+    color: white;
+    padding-right: 15px; /* Slight squeeze */
+}
+
+.card-btn:hover .icon-circle {
+    background: white;
+    color: var(--purple-dark);
+    transform: translateX(5px) rotate(-45deg); /* Playful rotation */
+}
