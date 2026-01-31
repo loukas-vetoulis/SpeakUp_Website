@@ -6,6 +6,11 @@
     --bg-light: #f4f0ff;
     --white: #ffffff;
     
+    /* NEW BRAND COLORS (From your image) */
+    --brand-dark:  #5a4594; /* Deep Purple */
+    --brand-lilac: #d8b9e9; /* The Medium Lilac */
+    --brand-pale:  #f0e5f6; /* The Very Light Lilac */
+    
     /* SPACING */
     --space-xs: 8px;
     --space-sm: 16px;

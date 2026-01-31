@@ -68,10 +68,16 @@ function initInfiniteScroll(slider, btnLeft, btnRight) {
 
     allCards.forEach(card => {
         card.addEventListener('click', function() {
+            // Check if the card is currently the center (active) one
             if (this.classList.contains('active')) {
                 const url = this.getAttribute('data-url');
-                if (url) console.log(`Navigating to ${url}`);
+                
+                // THE FIX: Actually navigate to the URL
+                if (url) {
+                    window.location.href = url;
+                }
             } else {
+                // If it's a side card, just scroll it to the center
                 const offset = (slider.offsetWidth / 2) - (this.offsetWidth / 2);
                 slider.scrollTo({ left: this.offsetLeft - offset, behavior: 'smooth' });
             }

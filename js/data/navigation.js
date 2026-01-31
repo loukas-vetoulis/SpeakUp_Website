@@ -1,7 +1,8 @@
 const NAVIGATION_DATA = [
     { label: "Home", url: "index.html" },
-    { label: "Become a member", url: "#" },
-    { label: "Who we are", url: "#" },
     { label: "Events", url: "events.html" },
-    { label: "Blog", url: "#" }
+    { label: "About Us", url: "about.html" },
+    { label: "Meet the Team", url: "team.html" },
+    { label: "BlogUp", url: "blog.html" },
+    { label: "Contact", url: "contact.html" }
 ];

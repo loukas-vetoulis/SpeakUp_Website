@@ -1,12 +1,28 @@
 /* --- SPONSORS --- */
 .sponsors-bar {
-    background: white; padding: var(--space-md) 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+    /* CHANGED: Use your new Pale Lilac instead of white */
+    background: var(--brand-pale); 
+    padding: var(--space-md) 0; 
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;
     width: 100%;
 }
-.sponsor-img { height: 40px; filter: grayscale(100%); opacity: 0.6; transition: 0.4s var(--ease-premium); }
-.sponsor-img:hover { filter: grayscale(0%); opacity: 1; transform: translateY(-2px); }
+.sponsor-img {
+    height: 40px;          /* Keep it smaller for the top */
+    width: auto;           /* Allow width to flow naturaly */
+    max-width: 150px;      /* Prevent huge logos */
+    object-fit: contain;   /* STOP STRETCHING */
+    
+    filter: grayscale(100%); 
+    opacity: 0.6; 
+    transition: 0.4s var(--ease-premium); 
+}
 
+.sponsor-img:hover { 
+    filter: grayscale(0%); 
+    opacity: 1; 
+    transform: translateY(-2px); 
+}
 /* --- CAROUSEL CONTAINER --- */
 .carousel-section {
     background: radial-gradient(circle at 50% 50%, #ba68c8 0%, #4a148c 100%);
@@ -138,6 +154,174 @@
 .time-label { font-size: 0.7rem; opacity: 0.9; text-transform: uppercase; margin-top: 5px; font-weight: 600; letter-spacing: 1px; }
 .calendar-link { display: inline-block; margin-top: 30px; color: var(--purple-dark); text-decoration: none; font-weight: 700; border-bottom: 2px solid transparent; transition: border 0.3s; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;}
 .calendar-link:hover { border-bottom: 2px solid var(--purple-dark); }
+
+/* --- BOTTOM BRANDS SECTION (Purple) --- */
+.brands-section-purple {
+    background-color: var(--purple-mid); /* Matches the middle purple tone */
+    padding: 60px 20px 0 20px;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.brands-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.brands-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.brands-row {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically centers them */
+    flex-wrap: wrap;
+    gap: 50px; /* Generous space between logos */
+    margin-bottom: 50px;
+}
+
+.brands-row img {
+    /* 1. SIZE */
+    height: 50px; 
+    width: auto; 
+    max-width: 180px;
+
+    /* 2. THE COLOR FIX (Instead of White) */
+    background-color: var(--brand-lilac); /* #d8b9e9 */
+    padding: 10px 15px; /* Add padding so logo breathes inside the box */
+    border-radius: 8px; /* Smooth corners */
+    
+    /* 3. BLENDING */
+    /* This removes the white box from inside JPG logos so they look clean */
+    mix-blend-mode: multiply; 
+    
+    /* 4. VISUALS */
+    object-fit: contain;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.brands-row img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    background-color: var(--brand-pale); /* Lighter on hover */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Mobile Adjustment: Make them slightly smaller on phones */
+@media (max-width: 768px) {
+    .brands-row img {
+        height: 35px;
+        gap: 30px;
+    }
+}
+
+/* --- PARALLAX BUBBLES --- */
+
+/* --- UPDATED PARALLAX BUBBLES --- */
+
+.parallax-bubble {
+    position: absolute;
+    border-radius: 50%;
+    /* FIX 1: Send strictly behind content */
+    z-index: 0; 
+    pointer-events: none; /* Keeps clicks working for links behind them */
+    
+    /* FIX 2: Smoother movement */
+    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform; 
+}
+
+/* Add a "pop" transition for when they grow */
+.parallax-bubble.pop {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+/* --- SECTION LAYOUT FIX --- */
+
+/* Add relative positioning so bubbles stay inside their sections */
+.calendar-section {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-light); 
+    z-index: 1;
+}
+
+.brands-section-purple {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--purple-mid);
+    color: white;
+    /* FIX 3: Force full width on laptops */
+    width: 100%;
+    min-width: 100%;
+    padding: 60px 20px 0 20px;
+    z-index: 1;
+}
+
+/* Ensure content sits ON TOP of bubbles */
+.calendar-content, 
+.brands-container, 
+.trust-bar {
+    position: relative;
+    /* FIX 4: Higher z-index than bubbles */
+    z-index: 10; 
+}
+
+/* --- COLORS & OPACITY FIX --- */
+
+.bubble-dark {
+    background-color: var(--purple-dark);
+    /* FIX 5: Very low opacity so text is readable */
+    opacity: 0.08; 
+}
+
+.bubble-light {
+    background-color: #e1bee7; 
+    /* FIX 6: Low opacity for the dark section */
+    opacity: 0.1; 
+}
+
+/* --- RESPONSIVE POSITIONS (Laptop Friendly) --- */
+/* We use percentages (%) instead of pixels so they fit any screen */
+
+.b-top-right {
+    width: 300px; height: 300px;
+    top: -50px; right: -50px;
+}
+
+.b-bottom-left {
+    width: 400px; height: 400px;
+    bottom: -100px; left: -100px;
+}
+
+.b-center-mini {
+    width: 80px; height: 80px;
+    top: 15%; right: 20%;
+}
+
+.b-top-left {
+    width: 250px; height: 250px;
+    top: -80px; left: -50px;
+}
+
+.b-bottom-right {
+    width: 350px; height: 350px;
+    bottom: -100px; right: -50px;
+}
+
+@media (min-width: 1024px) {
+    .nav-left { left: var(--space-xl); } .nav-right { right: var(--space-xl); }
+    .card h3 { font-size: 3rem; } .card h3 span { font-size: 1.1rem; }
+    .time-val { font-size: 3rem; }
+}
 
 @media (min-width: 1024px) {
     .nav-left { left: var(--space-xl); } .nav-right { right: var(--space-xl); }

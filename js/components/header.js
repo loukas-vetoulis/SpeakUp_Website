@@ -15,7 +15,7 @@ const HeaderComponent = {
             </div>
 
             <div class="hero-text">
-                <h2>Helping young people develop their communication and public speaking skills</h2>
+                <h2>Shaping the business leaders of tomorrow</h2>
             </div>
 
             <div class="hero-socials">
