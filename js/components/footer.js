@@ -1,5 +1,8 @@
 const FooterComponent = {
     render: () => {
+        // 1. Get the current year automatically
+        const currentYear = new Date().getFullYear(); 
+
         const linksHtml = NAVIGATION_DATA.map(link => 
             `<li><a href="${link.url}">${link.label}</a></li>`
         ).join('');
@@ -26,7 +29,8 @@ const FooterComponent = {
                     </div>
                 </div>
             </div>
-            <div class="copyright">Copyright © 2025 SpeakUp - All rights reserved | Terms & Conditions</div>
+            
+            <div class="copyright">Copyright © ${currentYear} SpeakUp - All rights reserved | Terms & Conditions</div>
         `;
     }
 };

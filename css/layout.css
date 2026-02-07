@@ -75,7 +75,7 @@
 
 footer { 
     /* CHANGED: Use the deep brand purple variable */
-    background: var(--brand-dark); 
+    background: var(--purple-mid); 
     color: var(--brand-pale); /* Use pale lilac for text instead of pure white */
     padding: var(--space-lg) var(--space-md); 
     font-size: 0.9rem; 

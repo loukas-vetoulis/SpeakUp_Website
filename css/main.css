@@ -3,3 +3,56 @@
 @import 'layout.css';
 @import 'components.css';
 @import 'events.css';
+
+/* Forces numbers to be monospaced so they don't jitter */
+.time-val {
+    font-variant-numeric: tabular-nums; 
+    font-feature-settings: "tnum";
+    min-width: 40px; /* Ensures enough space for 2 digits */
+    text-align: center;
+    display: inline-block;
+}
+
+/* A subtle heartbeat for the colons only - very smooth */
+.time-unit:nth-child(even) .time-val {
+    animation: pulse-colon 1s infinite ease-in-out;
+}
+
+@keyframes pulse-colon {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* --- LOGO ANIMATION --- */
+
+.logo-placeholder {
+    /* 1. DEFINE THE TRANSITION (The "Smooth" part) */
+    /* This cubic-bezier creates a subtle "bouncy" settling effect */
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Ensure the image doesn't overflow when it zooms */
+    overflow: hidden; 
+}
+
+/* 2. THE IMAGE (Inner Zoom) */
+.logo-placeholder img {
+    transition: transform 0.6s ease; /* Slightly slower than container for depth */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- HOVER STATE --- */
+
+/* Container Lifts & Glows */
+.logo-placeholder:hover {
+    transform: translateY(-5px) scale(1.05); /* Lifts up and grows slightly */
+    box-shadow: 0 20px 40px rgba(74, 20, 140, 0.4); /* Deep purple premium shadow */
+    border-color: white; /* Border becomes crisp white */
+    cursor: pointer;
+}
+
+/* Image Zooms In */
+.logo-placeholder:hover img {
+    transform: scale(1.15); /* Subtle zoom effect inside the circle */
+}

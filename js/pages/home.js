@@ -15,6 +15,14 @@ window.addEventListener('load', () => {
         
         initInfiniteScroll(slider, btnLeft, btnRight);
     }
+    
+    if (typeof EVENTS_DATA !== 'undefined') {
+        initCountdown();
+    }
+
+    // initBrandsMarquee();
+
+    initSponsorsMobileLoop();
 });
 
 function initInfiniteScroll(slider, btnLeft, btnRight) {
@@ -85,4 +93,73 @@ function initInfiniteScroll(slider, btnLeft, btnRight) {
     });
     
     handleScroll();
+}
+
+function initCountdown() {
+    const monthMap = { 'JAN': 0, 'FEB': 1, 'MAR': 2, 'APR': 3, 'MAY': 4, 'JUN': 5, 'JUL': 6, 'AUG': 7, 'SEP': 8, 'OCT': 9, 'NOV': 10, 'DEC': 11 };
+
+    const update = () => {
+        const now = new Date();
+        
+        // Find the next event in the future
+        const upcomingEvents = EVENTS_DATA.map(event => {
+            const eventDate = new Date(event.year, monthMap[event.month], parseInt(event.date));
+            const [hours, minutes] = event.time.split(' - ')[0].split(':');
+            eventDate.setHours(parseInt(hours), parseInt(minutes), 0);
+            return { ...event, fullDate: eventDate };
+        }).filter(event => event.fullDate > now).sort((a, b) => a.fullDate - b.fullDate);
+
+        const nextEvent = upcomingEvents[0];
+
+        // If no event, clear timer
+        if (!nextEvent) {
+            const container = document.querySelector('.calendar-content');
+            if (container) container.innerHTML = '<h2 class="calendar-title">NO UPCOMING EVENTS</h2>';
+            return;
+        }
+
+        // Update Title & Link
+        const titleEl = document.querySelector('.calendar-title');
+        if (titleEl) titleEl.innerText = `NEXT EVENT: ${nextEvent.title.toUpperCase()}`;
+        
+        const linkEl = document.querySelector('.calendar-link');
+        if (linkEl) linkEl.href = nextEvent.link;
+
+        // Calculate Difference
+        const diff = nextEvent.fullDate - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / 1000 / 60) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        // Update DOM (Check if element exists first to avoid errors)
+        const dEl = document.getElementById('days');
+        const hEl = document.getElementById('hours');
+        const mEl = document.getElementById('mins');
+        const sEl = document.getElementById('secs');
+
+        if (dEl) dEl.innerText = days.toString().padStart(2, '0');
+        if (hEl) hEl.innerText = hours.toString().padStart(2, '0');
+        if (mEl) mEl.innerText = mins.toString().padStart(2, '0');
+        if (sEl) sEl.innerText = secs.toString().padStart(2, '0');
+    };
+
+    update(); 
+    setInterval(update, 1000); // Update strictly every 1 second
+}
+
+function initSponsorsMobileLoop() {
+    const track = document.querySelector('.sponsors-track');
+    
+    if (track) {
+        // Get all original logos
+        const originals = Array.from(track.children);
+        
+        // Clone them exactly once
+        originals.forEach(logo => {
+            const clone = logo.cloneNode(true);
+            clone.classList.add('is-clone'); // Add class so we can hide on desktop
+            track.appendChild(clone);
+        });
+    }
 }

@@ -10,7 +10,10 @@ const HeaderComponent = {
         <div class="hero-content">
             <div class="logo-container">
                 <div class="logo-placeholder">
-                    <img src="assets/logo/speakup_logo.jpeg" alt="SpeakUp Logo">
+                    <a href="index.html" id="logo-link">
+                        <img src="assets/logo/speakup_logo.jpeg" alt="SpeakUp Logo">
+                    </a>
+                </div>
                 </div>
             </div>
 

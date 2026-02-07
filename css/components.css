@@ -1,27 +1,81 @@
-/* --- SPONSORS --- */
+/* --- CONTAINER --- */
 .sponsors-bar {
-    /* CHANGED: Use your new Pale Lilac instead of white */
     background: var(--brand-pale); 
-    padding: var(--space-md) 0; 
+    padding: 15px 0; 
     border-bottom: 1px solid rgba(0,0,0,0.05);
-    display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;
     width: 100%;
+    /* Flexbox settings for the container */
+    display: flex; 
+    justify-content: center;
+    overflow: hidden; /* Hides scrollbar on mobile */
 }
-.sponsor-img {
-    height: 40px;          /* Keep it smaller for the top */
-    width: auto;           /* Allow width to flow naturaly */
-    max-width: 150px;      /* Prevent huge logos */
-    object-fit: contain;   /* STOP STRETCHING */
+
+/* --- TRACK (Holds the images) --- */
+.sponsors-track {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center on Desktop */
+    gap: 40px; /* Consistent spacing */
     
+    /* On Desktop, we want a static row, so no animation by default */
+    width: 100%; 
+    max-width: 1200px;
+    flex-wrap: wrap; /* Wraps if there are too many logos on desktop */
+}
+
+/* --- LOGO SIZING (Restoring the "Old Approach") --- */
+.sponsor-img {
+    /* STRICT SIZING RULES */
+    height: auto;          /* Fixed height makes them all line up */
+    width: 120px;           /* Width adjusts naturally */
+    max-width: 150px;      /* Prevents very long logos from taking over */
+    object-fit: contain;   /* Ensures they don't stretch */
+    
+    /* Visuals */
     filter: grayscale(100%); 
     opacity: 0.6; 
-    transition: 0.4s var(--ease-premium); 
+    transition: 0.4s ease; 
+    
+    /* Prevent squashing on mobile */
+    flex-shrink: 0; 
 }
 
 .sponsor-img:hover { 
     filter: grayscale(0%); 
     opacity: 1; 
-    transform: translateY(-2px); 
+    transform: scale(1.1); 
+}
+
+/* --- CLONES (Hidden on Desktop) --- */
+/* We generate these with JS for the mobile loop, but hide them on PC */
+.sponsor-img.is-clone {
+    display: none;
+}
+
+
+/* --- MOBILE ONLY ANIMATION --- */
+@media (max-width: 768px) {
+    
+    .sponsors-track {
+        /* Force single line */
+        width: max-content; 
+        flex-wrap: nowrap; 
+        justify-content: flex-start;
+        
+        /* The Loop Animation */
+        animation: scroll-loop 20s linear infinite;
+    }
+
+    /* Show clones ONLY on mobile to allow infinite scrolling */
+    .sponsor-img.is-clone {
+        display: block; 
+    }
+
+    @keyframes scroll-loop {
+        0% { transform: translateX(0); }
+        /* Move exactly -50% because we duplicated the logos once */
+        100% { transform: translateX(-50%); } 
+    }
 }
 /* --- CAROUSEL CONTAINER --- */
 .carousel-section {
@@ -152,6 +206,7 @@
 }
 .time-val { font-size: 1.8rem; font-weight: 800; }
 .time-label { font-size: 0.7rem; opacity: 0.9; text-transform: uppercase; margin-top: 5px; font-weight: 600; letter-spacing: 1px; }
+.calendar-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 30px; color: var(--purple-dark); }
 .calendar-link { display: inline-block; margin-top: 30px; color: var(--purple-dark); text-decoration: none; font-weight: 700; border-bottom: 2px solid transparent; transition: border 0.3s; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;}
 .calendar-link:hover { border-bottom: 2px solid var(--purple-dark); }
 
@@ -180,49 +235,77 @@
 .brands-row {
     display: flex;
     justify-content: center;
-    align-items: center; /* Vertically centers them */
+    align-items: center;
     flex-wrap: wrap;
-    gap: 50px; /* Generous space between logos */
+    gap: 60px; /* More breathing room */
     margin-bottom: 50px;
 }
 
 .brands-row img {
-    /* 1. SIZE */
-    height: 50px; 
-    width: auto; 
-    max-width: 180px;
-
-    /* 2. THE COLOR FIX (Instead of White) */
-    background-color: var(--brand-lilac); /* #d8b9e9 */
-    padding: 10px 15px; /* Add padding so logo breathes inside the box */
-    border-radius: 8px; /* Smooth corners */
-    
-    /* 3. BLENDING */
-    /* This removes the white box from inside JPG logos so they look clean */
-    mix-blend-mode: multiply; 
-    
-    /* 4. VISUALS */
+    /* 1. SIZING - Control width, let height adjust */
+    width: 120px; 
+    height: auto;
     object-fit: contain;
-    opacity: 0.9;
-    transition: all 0.3s ease;
+
+    /* 2. REMOVE THE BOXINESS */
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    mix-blend-mode: normal; /* Turn off the blend mode */
+
+    /* 3. THE "GHOST" EFFECT */
+    /* This makes logos all white and slightly faded */
+    filter: grayscale(100%) brightness(0.2) opacity(0.6);    
+    /* 4. ANIMATION */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Hover Effect */
+/* Hover Effect: Reveal original colors and scale up */
 .brands-row img:hover {
-    opacity: 1;
-    transform: scale(1.05);
-    background-color: var(--brand-pale); /* Lighter on hover */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    filter: brightness(1) invert(0) opacity(1); /* Reset to original color */
+    transform: scale(1.1) translateY(-5px); /* Lift up slightly */
 }
 
-/* Mobile Adjustment: Make them slightly smaller on phones */
+/* --- MOBILE AUTO-SCROLL ANIMATION --- */
+/* --- MOBILE MARQUEE ANIMATION --- */
 @media (max-width: 768px) {
+    .brands-container {
+        overflow: hidden; /* Hide the scrollbar */
+        width: 100%;
+    }
+
+    .brands-row {
+        display: flex;
+        flex-wrap: nowrap; /* Force single line */
+        width: max-content; /* Allow row to be as wide as it needs */
+        gap: 40px; /* Space between logos */
+        padding: 10px 0;
+        
+        /* THE ANIMATION */
+        /* 10s = Faster speed (Lower number = Faster) */
+        animation: marquee-scroll 10s linear infinite;
+        
+        /* Fix for Safari flickering */
+        transform: translate3d(0, 0, 0); 
+    }
+    
+    /* Stop moving when user touches it */
+    .brands-row:hover, 
+    .brands-row:active {
+        animation-play-state: paused;
+    }
+
     .brands-row img {
-        height: 35px;
-        gap: 30px;
+        flex: 0 0 auto; /* Don't squash logos */
+        width: 100px;   /* Consistent size */
+        height: auto;
+    }
+
+    @keyframes marquee-scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); } /* Move exactly half the total width */
     }
 }
-
 /* --- PARALLAX BUBBLES --- */
 
 /* --- UPDATED PARALLAX BUBBLES --- */
@@ -254,21 +337,9 @@
     z-index: 1;
 }
 
-.brands-section-purple {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--purple-mid);
-    color: white;
-    /* FIX 3: Force full width on laptops */
-    width: 100%;
-    min-width: 100%;
-    padding: 60px 20px 0 20px;
-    z-index: 1;
-}
 
 /* Ensure content sits ON TOP of bubbles */
 .calendar-content, 
-.brands-container, 
 .trust-bar {
     position: relative;
     /* FIX 4: Higher z-index than bubbles */
@@ -327,4 +398,72 @@
     .nav-left { left: var(--space-xl); } .nav-right { right: var(--space-xl); }
     .card h3 { font-size: 3rem; } .card h3 span { font-size: 1.1rem; }
     .time-val { font-size: 3rem; }
+}
+
+/* =========================================
+   MOBILE FIX: CALENDAR & COUNTDOWN
+   ========================================= */
+
+@media (max-width: 768px) {
+    
+    /* 1. Adjust Section Spacing */
+    .calendar-section {
+        padding: 60px 20px; /* Reduce massive padding */
+    }
+
+    /* 2. TRANSFORM THE COUNTDOWN TO 2x2 GRID */
+    .countdown-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two items per row */
+        gap: 20px 10px; /* 20px vertical gap, 10px horizontal gap */
+        padding: 30px 20px;
+        width: 100%;
+        max-width: 340px; /* Prevents it from getting too wide */
+        border-radius: 30px; /* Slightly less rounded */
+        justify-items: center; /* Center content in grid cells */
+    }
+
+    /* 3. HIDE THE COLONS (:) */
+    /* In a grid layout, the colons look weird. We hide them. */
+    /* Since your colons are distinct .time-unit divs (evens), we hide evens */
+    .countdown-container .time-unit:nth-child(even) {
+        display: none;
+    }
+
+    /* 4. STYLE THE TIME UNITS */
+    .time-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Keep numbers big and punchy */
+    .time-val {
+        font-size: 2.2rem; 
+        line-height: 1;
+        margin-bottom: 5px;
+    }
+
+    .time-label {
+        font-size: 0.75rem;
+        opacity: 0.8;
+    }
+    
+    /* 5. FIX PARALLAX BUBBLES ON MOBILE */
+    /* They are currently huge (300px) and will cover the text on phones */
+    .parallax-bubble {
+        transform: scale(0.5); /* Shrink them to 50% size */
+        opacity: 0.05; /* Make them even more subtle so text is readable */
+    }
+    
+    /* Specific positioning adjustments for mobile so they don't overlap faces/text */
+    .b-top-right { top: -20px; right: -80px; }
+    .b-bottom-left { bottom: -50px; left: -80px; }
+    
+    /* 6. TITLE SIZE */
+    .calendar-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
 }
