@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | SpeakUP</title>
+    <link rel="icon" type="image/jpeg" href="assets/logo/speakup_logo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/contact.css">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+    <div class="fullscreen-menu" id="navMenu"></div>
+    <header class="hero-section"></header>
+
+    <main class="contact-section">
+        <div class="contact-container">
+            
+            <div class="contact-info fade-up">
+                <h5 class="eyebrow">GET IN TOUCH</h5>
+                <h1 class="contact-title">Let's start a <br> conversation.</h1>
+                <p class="contact-desc">
+                    Interested in joining the team, partnering for an event, or just want to say hi? We'd love to hear from you.
+                </p>
+
+                <div class="info-items">
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Athens University of Economics and Business<br>Patission 76, Athens</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>speakupaueb@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-connect">
+                    <span>Follow us:</span>
+                    <a href="https://www.linkedin.com/company/speakup-aueb-genz/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/speakup_auebgenz/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@speakupaueb_genz" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper fade-up">
+                <form id="contactForm" class="glass-form">
+                    
+                    <div class="input-group">
+                        <input type="text" id="name" name="user_name" required placeholder=" ">
+                        <label for="name">Your Name</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" id="email" name="user_email" required placeholder=" ">
+                        <label for="email">Email Address</label>
+                    </div>
+
+                    <div class="input-group">
+                        <select id="subject" name="subject">
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Join Team">Join the Team</option>
+                            <option value="Partnership">Partnership</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea id="message" name="message" required placeholder=" " rows="4"></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="js/data/navigation.js"></script>
+    <script src="js/data/events.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/components/overlay.js"></script>
+    <script src="js/components/footer.js"></script>
+    <script src="js/global.js"></script>
+    
+    <script src="js/pages/contact.js"></script>
+</body>
+</html>
