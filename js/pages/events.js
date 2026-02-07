@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
         card.className = 'event-card';
         if (isExpired) card.classList.add('event-expired');
 
-        // Button Logic: Completed vs Sign Up
+        // Button Logic
         let buttonHtml;
         if (isExpired) {
             buttonHtml = `
@@ -55,8 +55,7 @@ window.addEventListener('load', () => {
 
         // HTML Structure
         card.innerHTML = `
-            <div class="card-media">
-                <img src="${event.image}" alt="${event.title}" style="${isExpired ? 'filter: grayscale(100%); opacity: 0.9;' : ''}">
+            <div class="card-media" style="background: #f9f9f9;"> <img src="${event.image}" alt="${event.title}" style="object-fit: contain; width: 100%; height: 100%;">
                 
                 <div class="glass-date">
                     <span class="day">${event.date}</span>
