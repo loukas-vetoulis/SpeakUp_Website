@@ -10,7 +10,9 @@ const FooterComponent = {
         return `
             <div class="footer-container">
                 <div class="footer-brand">
-                    <div class="footer-logo">SpeakUP <i class="fas fa-arrow-up footer-arrow"></i> <br> AUEB</div>
+                    <a href="index.html" class="footer-logo-link">
+                        <div class="footer-logo">SpeakUP <i class="fas fa-arrow-up footer-arrow"></i> <br> AUEB</div>
+                    </a>
                 </div>
                 
                 <div class="footer-nav">
