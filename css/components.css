@@ -72,7 +72,16 @@
    CAROUSEL SECTION
    ========================================== */
 .carousel-section {
-  background: var(--carousel-gradient);
+  background-color: var(--bg-light); 
+    background-image: url('../assets/backgrounds/Speakup_BG.png');
+    
+    /* Critical Scaling Properties */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image fills the section */
+    background-position: center center; /* Keeps the focal point central */
+    
+    /* Optional: Fixed background for a parallax effect */
+    background-attachment: fixed;
   padding: var(--space-xl) 0;
   position: relative;
   overflow: hidden;
@@ -505,4 +514,13 @@
 
   .b-top-right { top: -20px; right: -80px; }
   .b-bottom-left { bottom: -50px; left: -80px; }
+}
+
+/* Create a class for the dynamic JS message to keep the JS clean */
+.no-events-message {
+    text-align: center;
+    width: 100%;
+    grid-column: 1 / -1;
+    color: var(--brand-lilac);
+    font-weight: 500; /* Optional: adds a bit of weight to the brand color */
 }

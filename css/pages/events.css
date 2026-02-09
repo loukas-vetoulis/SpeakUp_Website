@@ -1,7 +1,17 @@
 /* --- LAYOUT & HEADER --- */
 .events-page-section {
     padding: var(--space-xl) var(--space-md);
+    /* Fallback color + Image path */
     background-color: var(--bg-light); 
+    background-image: url('../../assets/backgrounds/Speakup_BG.png');
+    
+    /* Critical Scaling Properties */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image fills the section */
+    background-position: center center; /* Keeps the focal point central */
+    
+    /* Optional: Fixed background for a parallax effect */
+    background-attachment: fixed; 
     min-height: 100vh;
 }
 
@@ -15,14 +25,14 @@
 .page-title {
     font-size: 2.5rem;
     font-weight: 800;
-    color: var(--color-primary-deep);
+    color: var(--brand-lilac);
     text-transform: uppercase;
     letter-spacing: -1px;
     margin-bottom: 10px;
 }
 
 .page-subtitle {
-    color: #666;
+    color: var(--brand-lilac);
     font-size: 1.1rem;
 }
 

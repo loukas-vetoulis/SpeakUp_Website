@@ -60,7 +60,16 @@
 
 /* --- 2. TEAM SECTION (Premium Grid) --- */
 .team-section {
-    background: var(--bg-light); /* Light grey background */
+    background-color: var(--bg-light); 
+    background-image: url('../../assets/backgrounds/Speakup_BG.png');
+    
+    /* Critical Scaling Properties */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image fills the section */
+    background-position: center center; /* Keeps the focal point central */
+    
+    /* Optional: Fixed background for a parallax effect */
+    background-attachment: fixed;
     padding: 100px 20px;
     text-align: center;
 }
@@ -220,4 +229,9 @@
         font-size: 1.4rem;
         padding: 10px; /* larger touch target */
     }
+}
+
+
+.section-title.fade-in {
+    color: var(--brand-lilac);
 }

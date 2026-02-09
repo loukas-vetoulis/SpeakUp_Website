@@ -85,7 +85,7 @@ window.addEventListener('load', () => {
 
     // 5. Inject
     if (upcomingGrid) {
-        if (upcomingEvents.length === 0) upcomingGrid.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1;">No upcoming events.</p>';
+        if (upcomingEvents.length === 0) upcomingGrid.innerHTML = '<p class="no-events-message">No upcoming events.</p>';
         else upcomingEvents.forEach(e => upcomingGrid.appendChild(renderCard(e, false)));
     }
 

@@ -1,6 +1,15 @@
 /* --- HERO SECTION --- */
 .hero-section {
-    background: radial-gradient(circle at 50% 50%, #9c27b0 0%, #4a148c 100%);
+    background-color: var(--bg-light); 
+    background-image: url('../assets/backgrounds/Speakup_BG.png');
+    
+    /* Critical Scaling Properties */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image fills the section */
+    background-position: center center; /* Keeps the focal point central */
+    
+    /* Optional: Fixed background for a parallax effect */
+    background-attachment: fixed;
     color: white; padding-bottom: var(--space-lg); position: relative; text-align: center; overflow: hidden;
     /* Center Content Vertically */
     display: flex; flex-direction: column; align-items: center;
