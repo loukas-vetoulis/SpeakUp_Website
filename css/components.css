@@ -538,7 +538,6 @@
     
     /* Smooth Transition for the "Magic" feel */
     transition: filter 0.4s ease, opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: filter, opacity, transform;
     
     /* Ensure they render crisply during transition */
     will-change: filter, opacity, transform;
