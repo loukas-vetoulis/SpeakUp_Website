@@ -20,6 +20,35 @@
 }
 
 .navbar { width: 100%; display: flex; justify-content: space-between; padding: 15px 20px; position: relative; z-index: 10; }
+.navbar-socials {
+    display: flex;
+    gap: 20px; /* Space between the icons */
+    align-items: center;
+}
+
+.navbar-socials a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-socials i {
+    font-size: 1.6rem; /* Good visible size */
+    color: #4a148c;    /* --purple-dark */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover Effect: Lift up slightly */
+.navbar-socials a:hover i {
+    transform: translateY(-3px);
+    opacity: 0.8; /* Subtle interaction feedback */
+}
+
+@media (max-width: 768px) {
+    .navbar-socials i {
+        font-size: 1.4rem;
+    }
+}
 .search-bar-container { background: var(--color-primary-deep); border-radius: 20px; padding: 10px 20px; display: flex; align-items: center; }
 .hamburger { color: white; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
 
