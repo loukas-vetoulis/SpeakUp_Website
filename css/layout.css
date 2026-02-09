@@ -50,38 +50,120 @@
 }
 
 /* --- MENU OVERLAY (ANIMATION FIX) --- */
+/* --- PREMIUM FULLSCREEN MENU (Curtain Wipe) --- */
 .fullscreen-menu {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 100%);
-    z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    opacity: 0; visibility: hidden; 
-    transition: opacity 0.4s ease, visibility 0.4s;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    z-index: 9990; /* Below page transition (9999), above header (100) */
+    
+    /* BACKGROUND: Deep Glassy Purple */
+    /* Matches your brand colors but slightly transparent for depth */
+    background: linear-gradient(135deg, rgba(74, 20, 140, 0.98) 0%, rgba(50, 10, 100, 0.99) 100%);
+    backdrop-filter: blur(15px); /* Premium frost effect */
+    
+    /* LAYOUT */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* ANIMATION: The "Curtain Wipe" */
+    /* Default: Clipped completely from the bottom (Hidden) */
+    clip-path: inset(0 0 100% 0);
+    
+    /* Smooth "Quart" easing matches your page transitions */
+    transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    pointer-events: none;
 }
-.fullscreen-menu.active { opacity: 1; visibility: visible; }
-.close-menu-btn { position: absolute; top: 30px; right: 30px; color: white; font-size: 2rem; cursor: pointer; }
 
-.menu-links { list-style: none; text-align: center; }
-.menu-links li { 
-    margin: 20px 0; 
-    opacity: 0; 
-    transform: translateY(30px); 
-    transition: transform 0.5s ease, opacity 0.5s ease;
+/* ACTIVE STATE: Reveal the menu */
+.fullscreen-menu.active {
+    clip-path: inset(0 0 0% 0); /* Full reveal */
+    pointer-events: all;
 }
 
-/* Staggered Animation Logic */
-.fullscreen-menu.active .menu-links li { opacity: 1; transform: translateY(0); }
-.fullscreen-menu.active .menu-links li:nth-child(1) { transition-delay: 0.1s; }
-.fullscreen-menu.active .menu-links li:nth-child(2) { transition-delay: 0.2s; }
-.fullscreen-menu.active .menu-links li:nth-child(3) { transition-delay: 0.3s; }
-.fullscreen-menu.active .menu-links li:nth-child(4) { transition-delay: 0.4s; }
-
-.menu-links a { color: white; font-size: 1.8rem; font-weight: 700; text-decoration: none; position: relative; }
-.menu-links a::after {
-    content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%;
-    background-color: white; transition: width 0.3s ease, left 0.3s ease;
+/* --- CLOSE BUTTON --- */
+.close-menu-btn {
+    position: absolute;
+    top: 40px; right: 40px;
+    color: rgba(255, 255, 255, 0.5); /* Subtle start color */
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    z-index: 10;
 }
-.menu-links a:hover::after { width: 100%; left: 0; }
 
+.close-menu-btn:hover {
+    color: white;
+    transform: rotate(90deg); /* Playful interaction */
+}
+
+/* --- MENU LINKS CONTAINER --- */
+.menu-links {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+}
+
+.menu-links li {
+    margin: 25px 0;
+    opacity: 0;
+    transform: translateY(40px); /* Start slightly lower */
+    transition: transform 0.6s cubic-bezier(0.215, 0.610, 0.355, 1.000), opacity 0.6s ease;
+}
+
+/* --- TYPOGRAPHY: Clean, Bold, Solid --- */
+.menu-links a {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    
+    /* Big and Bold, but Solid (Readable) */
+    font-size: 3rem; 
+    font-weight: 700;
+    
+    text-decoration: none;
+    color: white; /* Pure white text */
+    letter-spacing: -1px; /* Tight, modern tracking */
+    
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* HOVER EFFECT: Scale & Glow */
+/* Instead of the hollow outline, we do a subtle lift and glow */
+.menu-links a:hover {
+    transform: scale(1.05); /* Slight zoom */
+    color: #e1bee7; /* Very light purple tint */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6); /* Soft glow behind text */
+}
+
+/* --- STAGGERED ENTRANCE --- */
+/* This makes the items slide up one by one */
+.fullscreen-menu.active .menu-links li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fullscreen-menu.active .menu-links li:nth-child(1) { transition-delay: 0.2s; }
+.fullscreen-menu.active .menu-links li:nth-child(2) { transition-delay: 0.3s; }
+.fullscreen-menu.active .menu-links li:nth-child(3) { transition-delay: 0.4s; }
+.fullscreen-menu.active .menu-links li:nth-child(4) { transition-delay: 0.5s; }
+.fullscreen-menu.active .menu-links li:nth-child(5) { transition-delay: 0.6s; }
+
+/* --- MOBILE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+    .menu-links a {
+        font-size: 2.2rem; /* Smaller on mobile */
+    }
+    .menu-links li {
+        margin: 20px 0;
+    }
+    .close-menu-btn {
+        top: 25px; right: 25px;
+        font-size: 2rem;
+    }
+}
 footer { 
     /* CHANGED: Use the deep brand purple variable */
     background: var(--color-primary-deep); 

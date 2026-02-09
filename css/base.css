@@ -1,3 +1,4 @@
+/* --- GLOBAL RESETS --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -6,49 +7,69 @@ body {
     overflow-x: hidden;
     color: #333;
     line-height: 1.5;
-    /* Enforce vertical stacking */
     display: flex;
     flex-direction: column;
+    /* Ensure body is visible immediately, curtain handles the rest */
+    opacity: 1 !important; 
 }
 
+/* --- TRANSITION CURTAIN CONTAINER --- */
 .transition-curtain-container {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 9999;
-    pointer-events: none; /* Let clicks pass through when hidden */
+    width: 100%; height: 100vh; /* Use 100vh to ensure full screen cover */
+    z-index: 99999; /* Higher than everything */
+    pointer-events: none; /* Allows clicks to pass through when hidden */
     display: flex;
     flex-direction: column;
 }
 
-/* The Layers */
+/* --- THE CURTAIN LAYERS --- */
 .curtain-layer {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    transform-origin: bottom; /* Grow from bottom */
-    transform: scaleY(1); /* Default: Covering the screen */
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* "Quart" Ease */
+    transform-origin: bottom; /* Default grow direction */
+    transform: scaleY(1); /* Start covering screen */
+    will-change: transform;
+    
+    /* "Quart" Ease for Premium Feel */
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); 
 }
 
-/* LAYER COLORS (Using your variables) */
-.layer-1 { background-color: var(--brand-pale); z-index: 100; transition-delay: 0.2s; }
-.layer-2 { background-color: var(--brand-lilac); z-index: 101; transition-delay: 0.1s; }
-.layer-3 { background-color: var(--brand-dark);  z-index: 102; transition-delay: 0s; }
+/* --- LAYER COLORS & STAGGERING --- */
+/* Layer 1 (Lightest - Pale) */
+.layer-1 { 
+    background-color: var(--brand-pale, #f3e5f5); 
+    z-index: 100; 
+    transition-delay: 0.2s; /* Leaves last */
+}
 
-/* --- STATE 1: PAGE LOADED (Reveal Content) --- */
-/* When page loads, curtains shrink UP (ScaleY 0) */
+/* Layer 2 (Mid - Lilac) */
+.layer-2 { 
+    background-color: var(--brand-lilac, #d1c4e9); 
+    z-index: 101; 
+    transition-delay: 0.1s; 
+}
+
+/* Layer 3 (Darkest - Main Brand Color) */
+.layer-3 { 
+    background-color: var(--brand-dark, #4a148c); 
+    z-index: 102; 
+    transition-delay: 0s; /* Leaves first on reveal */
+}
+
+/* --- ANIMATION STATE 1: REVEAL (Page Load) --- */
+/* Curtains shrink UP away from the screen */
 body.page-loaded .curtain-layer {
     transform: scaleY(0);
-    transform-origin: top; /* Shrink towards the top */
+    transform-origin: top; 
 }
 
-/* --- STATE 2: PAGE EXITING (Cover Content) --- */
-/* When leaving, curtains grow UP from bottom */
+/* --- ANIMATION STATE 2: EXIT (Link Click) --- */
+/* Curtains grow UP from bottom to cover screen */
 body.page-exiting .curtain-layer {
     transform: scaleY(1);
-    transform-origin: bottom; /* Grow from the bottom */
+    transform-origin: bottom;
+    transition-delay: 0s; /* No delay on exit, cover fast */
 }
-
-/* Ensure the body is visible immediately */
-body { opacity: 1 !important; }
