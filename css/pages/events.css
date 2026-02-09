@@ -3,7 +3,7 @@
     padding: var(--space-xl) var(--space-md);
     /* Fallback color + Image path */
     background-color: var(--bg-light); 
-    background-image: url('../../assets/backgrounds/Speakup_BG.png');
+    background-image: url('../../assets/backgrounds/Speakup_BG.jpg');
     
     /* Critical Scaling Properties */
     background-repeat: no-repeat;

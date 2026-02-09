@@ -61,7 +61,7 @@
 /* --- 2. TEAM SECTION (Premium Grid) --- */
 .team-section {
     background-color: var(--bg-light); 
-    background-image: url('../../assets/backgrounds/Speakup_BG.png');
+    background-image: url('../../assets/backgrounds/Speakup_BG.jpg');
     
     /* Critical Scaling Properties */
     background-repeat: no-repeat;
