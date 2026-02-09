@@ -524,3 +524,37 @@
     color: var(--brand-lilac);
     font-weight: 500; /* Optional: adds a bit of weight to the brand color */
 }
+
+/* --- PARTNER & BRAND LOGOS --- */
+
+/* 1. Default State (Grayscale & Faded) */
+.sponsors-track img,
+.brands-row img {
+    /* Turn completely black & white */
+    filter: grayscale(100%);
+    
+    /* Fade them out slightly so they don't compete with content */
+    opacity: 0.85; 
+    
+    /* Smooth Transition for the "Magic" feel */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Ensure they render crisply during transition */
+    will-change: filter, opacity, transform;
+}
+
+/* 2. Hover State (Full Color & Focus) */
+.sponsors-track img:hover,
+.brands-row img:hover {
+    /* Restore full color */
+    filter: grayscale(0%);
+    
+    /* Restore full visibility */
+    opacity: 1;
+    
+    /* Subtle Pop Effect */
+    transform: scale(1.1);
+    
+    /* Optional: Add a subtle drop shadow to lift it off the page */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+}
