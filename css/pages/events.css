@@ -1,0 +1,212 @@
+/* --- LAYOUT & HEADER --- */
+.events-page-section {
+    padding: var(--space-xl) var(--space-md);
+    background-color: var(--bg-light); 
+    min-height: 100vh;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto; margin-right: auto;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-primary-deep);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* --- THE GRID --- */
+.events-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+@media (min-width: 768px) {
+    .events-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+}
+
+@media (min-width: 1024px) {
+    .events-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* --- INTERACTIVE CARD DESIGN --- */
+.event-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative; /* Essential for stretched link */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer; /* Makes the whole card look clickable */
+}
+
+/* HOVER: Lift & Glow */
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.15);
+}
+
+/* 1. MEDIA AREA */
+.card-media {
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+/* Zoom Image on Card Hover */
+.event-card:hover .card-media img {
+    transform: scale(1.1);
+}
+
+/* Glass Date Badge */
+.glass-date {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 60px; height: 70px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+.glass-date .day {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-primary-deep);
+    line-height: 1;
+}
+
+.glass-date .month {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.category-tag {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: rgba(74, 20, 140, 0.9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+/* 2. BODY AREA */
+.card-body {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.meta-info {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    transition: color 0.3s;
+}
+
+.event-card:hover .card-title {
+    color: var(--purple-mid);
+}
+
+/* 3. BUTTONS */
+.card-btn {
+    margin-top: auto;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f4f4ff;
+    padding: 10px 10px 10px 20px;
+    border-radius: 50px;
+    color: var(--purple-mid);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.icon-circle {
+    width: 36px; height: 36px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease;
+}
+
+/* Button Active State on Card Hover */
+.event-card:hover .card-btn {
+    background: var(--purple-mid);
+    color: white;
+    padding-right: 15px;
+}
+
+.event-card:hover .icon-circle {
+    background: white;
+    color: var(--purple-mid);
+    transform: translateX(5px);
+}
+
+/* --- THE "CLICK ANYWHERE" TRICK --- */
+/* This expands the link around the image to cover the whole card */
+.card-media-link::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    /* We make it cover the parent (.event-card) */
+    width: 100%; height: 250%; /* Height > 100% to cover the text below too */
+    z-index: 1;
+}
+
+/* Ensure the real button stays clickable on top just in case */
+.card-btn {
+    position: relative;
+    z-index: 2;
+}

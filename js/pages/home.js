@@ -20,10 +20,42 @@ window.addEventListener('load', () => {
         initCountdown();
     }
 
-    // initBrandsMarquee();
-
-    initSponsorsMobileLoop();
+    // Duplicate logos for seamless infinite scroll
+    duplicateLogos();
 });
+
+function duplicateLogos() {
+    const isMobile = window.innerWidth <= 768;
+    const isTablet = window.innerWidth <= 1024;
+    
+    // Duplicate sponsors ONLY on mobile (≤768px)
+    if (isMobile) {
+        const sponsorsTrack = document.querySelector('.sponsors-track');
+        if (sponsorsTrack && !sponsorsTrack.hasAttribute('data-duplicated')) {
+            const originalLogos = Array.from(sponsorsTrack.querySelectorAll('.sponsor-img'));
+            originalLogos.forEach(logo => {
+                const clone = logo.cloneNode(true);
+                sponsorsTrack.appendChild(clone);
+            });
+            sponsorsTrack.setAttribute('data-duplicated', 'true');
+        }
+    }
+    
+    // Duplicate brand rows ONLY on tablet/mobile (≤1024px)
+    if (isTablet) {
+        const brandRows = document.querySelectorAll('.brands-row');
+        brandRows.forEach(row => {
+            if (!row.hasAttribute('data-duplicated')) {
+                const originalLogos = Array.from(row.querySelectorAll('img'));
+                originalLogos.forEach(logo => {
+                    const clone = logo.cloneNode(true);
+                    row.appendChild(clone);
+                });
+                row.setAttribute('data-duplicated', 'true');
+            }
+        });
+    }
+}
 
 function initInfiniteScroll(slider, btnLeft, btnRight) {
     const originalCards = Array.from(slider.children);
@@ -76,16 +108,12 @@ function initInfiniteScroll(slider, btnLeft, btnRight) {
 
     allCards.forEach(card => {
         card.addEventListener('click', function() {
-            // Check if the card is currently the center (active) one
             if (this.classList.contains('active')) {
                 const url = this.getAttribute('data-url');
-                
-                // THE FIX: Actually navigate to the URL
                 if (url) {
                     window.location.href = url;
                 }
             } else {
-                // If it's a side card, just scroll it to the center
                 const offset = (slider.offsetWidth / 2) - (this.offsetWidth / 2);
                 slider.scrollTo({ left: this.offsetLeft - offset, behavior: 'smooth' });
             }
@@ -101,7 +129,6 @@ function initCountdown() {
     const update = () => {
         const now = new Date();
         
-        // Find the next event in the future
         const upcomingEvents = EVENTS_DATA.map(event => {
             const eventDate = new Date(event.year, monthMap[event.month], parseInt(event.date));
             const [hours, minutes] = event.time.split(' - ')[0].split(':');
@@ -111,28 +138,24 @@ function initCountdown() {
 
         const nextEvent = upcomingEvents[0];
 
-        // If no event, clear timer
         if (!nextEvent) {
             const container = document.querySelector('.calendar-content');
             if (container) container.innerHTML = '<h2 class="calendar-title">NO UPCOMING EVENTS</h2>';
             return;
         }
 
-        // Update Title & Link
         const titleEl = document.querySelector('.calendar-title');
         if (titleEl) titleEl.innerText = `NEXT EVENT: ${nextEvent.title.toUpperCase()}`;
         
         const linkEl = document.querySelector('.calendar-link');
         if (linkEl) linkEl.href = nextEvent.link;
 
-        // Calculate Difference
         const diff = nextEvent.fullDate - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const mins = Math.floor((diff / 1000 / 60) % 60);
         const secs = Math.floor((diff / 1000) % 60);
 
-        // Update DOM (Check if element exists first to avoid errors)
         const dEl = document.getElementById('days');
         const hEl = document.getElementById('hours');
         const mEl = document.getElementById('mins');
@@ -145,21 +168,5 @@ function initCountdown() {
     };
 
     update(); 
-    setInterval(update, 1000); // Update strictly every 1 second
-}
-
-function initSponsorsMobileLoop() {
-    const track = document.querySelector('.sponsors-track');
-    
-    if (track) {
-        // Get all original logos
-        const originals = Array.from(track.children);
-        
-        // Clone them exactly once
-        originals.forEach(logo => {
-            const clone = logo.cloneNode(true);
-            clone.classList.add('is-clone'); // Add class so we can hide on desktop
-            track.appendChild(clone);
-        });
-    }
+    setInterval(update, 1000);
 }

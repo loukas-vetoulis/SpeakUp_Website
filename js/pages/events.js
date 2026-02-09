@@ -1,5 +1,4 @@
 window.addEventListener('load', () => {
-    // Select both grids
     const upcomingGrid = document.getElementById('upcoming-grid');
     const pastGrid = document.getElementById('past-grid');
     
@@ -29,45 +28,55 @@ window.addEventListener('load', () => {
     upcomingEvents.sort((a, b) => a.fullDate - b.fullDate);
     pastEvents.sort((a, b) => b.fullDate - a.fullDate);
 
-    // 4. Render Function
+    // 4. Render Function (UPDATED)
     const renderCard = (event, isExpired) => {
         const card = document.createElement('article');
         card.className = 'event-card';
         if (isExpired) card.classList.add('event-expired');
 
+        // KEY UPDATE: Create dynamic link based on ID
+        const detailsLink = `event-details.html?id=${event.id}`;
+
         // Button Logic
         let buttonHtml;
         if (isExpired) {
+            // Past event? "Read Recap"
             buttonHtml = `
-                <div class="card-btn" style="background: #f3e5f5; color: #4a148c; border: 1px solid #d1c4e9; cursor: default;">
-                    <span style="font-weight: 700;">Completed</span>
-                    <div class="icon-circle" style="background: #4a148c; color: white;"><i class="fas fa-check"></i></div>
-                </div>
+                <a href="${detailsLink}" class="card-btn" style="background: #f3e5f5; color: #4a148c; border: 1px solid #d1c4e9;">
+                    <span style="font-weight: 700;">Read Recap</span>
+                    <div class="icon-circle" style="background: #4a148c; color: white;"><i class="fas fa-book-open"></i></div>
+                </a>
             `;
         } else {
+            // Upcoming event? "Info & Sign Up"
             buttonHtml = `
-                <a href="${event.link}" class="card-btn">
-                    <span>Sign Up</span>
+                <a href="${detailsLink}" class="card-btn">
+                    <span>Info & Sign Up</span>
                     <div class="icon-circle"><i class="fas fa-arrow-right"></i></div>
                 </a>
             `;
         }
 
-        // HTML Structure
+        // HTML Structure (Image links to details too)
         card.innerHTML = `
-            <div class="card-media" style="background: #f9f9f9;"> <img src="${event.image}" alt="${event.title}" style="object-fit: contain; width: 100%; height: 100%;">
-                
-                <div class="glass-date">
-                    <span class="day">${event.date}</span>
-                    <span class="month">${event.month}</span>
-                    <span class="year" style="display:block; font-size: 0.65rem; font-weight: 600; margin-top: 2px;">${event.year}</span>
+            <a href="${detailsLink}" class="card-media-link">
+                <div class="card-media" style="background: #f9f9f9;"> 
+                    <img src="${event.image}" alt="${event.title}" style="object-fit: contain; width: 100%; height: 100%;">
+                    
+                    <div class="glass-date">
+                        <span class="day">${event.date}</span>
+                        <span class="month">${event.month}</span>
+                        <span class="year" style="display:block; font-size: 0.65rem; font-weight: 600; margin-top: 2px;">${event.year}</span>
+                    </div>
+                    
+                    <div class="category-tag">${event.category}</div>
                 </div>
-                
-                <div class="category-tag">${event.category}</div>
-            </div>
+            </a>
             <div class="card-body">
                 <div class="meta-info"><i class="far fa-clock"></i> ${event.time}</div>
-                <h3 class="card-title">${event.title}</h3>
+                <h3 class="card-title">
+                    <a href="${detailsLink}" style="text-decoration: none; color: inherit;">${event.title}</a>
+                </h3>
                 ${buttonHtml} 
             </div>
         `;

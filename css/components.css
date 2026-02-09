@@ -1,448 +1,508 @@
-/* --- CONTAINER --- */
+/* ==========================================
+   SPONSORS BAR (Top Section)
+   ========================================== */
 .sponsors-bar {
-    background: var(--brand-pale); 
-    padding: 15px 0; 
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    width: 100%;
-    /* Flexbox settings for the container */
-    display: flex; 
-    justify-content: center;
-    overflow: hidden; /* Hides scrollbar on mobile */
+  background: var(--brand-pale);
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
-/* --- TRACK (Holds the images) --- */
 .sponsors-track {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center on Desktop */
-    gap: 40px; /* Consistent spacing */
-    
-    /* On Desktop, we want a static row, so no animation by default */
-    width: 100%; 
-    max-width: 1200px;
-    flex-wrap: wrap; /* Wraps if there are too many logos on desktop */
+  display: flex;
+  align-items: center;
+  gap: var(--logo-gap-desktop);
 }
 
-/* --- LOGO SIZING (Restoring the "Old Approach") --- */
 .sponsor-img {
-    /* STRICT SIZING RULES */
-    height: auto;          /* Fixed height makes them all line up */
-    width: 120px;           /* Width adjusts naturally */
-    max-width: 150px;      /* Prevents very long logos from taking over */
-    object-fit: contain;   /* Ensures they don't stretch */
-    
-    /* Visuals */
-    /* filter: grayscale(100%); 
-    opacity: 0.6;  */
-    transition: 0.4s ease; 
-    
-    /* Prevent squashing on mobile */
-    flex-shrink: 0; 
+  height: auto;
+  width: var(--logo-width-desktop);
+  max-width: var(--logo-max-width);
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: var(--transition-medium) var(--ease-smooth);
 }
 
-.sponsor-img:hover { 
-    filter: grayscale(0%); 
-    opacity: 1; 
-    transform: scale(1.1); 
+.sponsor-img:hover {
+  transform: scale(1.1);
 }
 
-/* --- CLONES (Hidden on Desktop) --- */
-/* We generate these with JS for the mobile loop, but hide them on PC */
-.sponsor-img.is-clone {
-    display: none;
+/* Desktop: centered static grid */
+@media (min-width: 769px) {
+  .sponsors-track {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
-
-/* --- MOBILE ONLY ANIMATION --- */
+/* Mobile: infinite marquee - NO JAVASCRIPT NEEDED */
 @media (max-width: 768px) {
-    
-    .sponsors-track {
-        /* Force single line */
-        width: max-content; 
-        flex-wrap: nowrap; 
-        justify-content: flex-start;
-        
-        /* The Loop Animation */
-        animation: scroll-loop 20s linear infinite;
-    }
+  .sponsors-bar {
+    position: relative;
+  }
+  
+  .sponsors-track {
+    width: max-content;
+    gap: var(--logo-gap-mobile);
+    /* Animation moves continuously */
+    animation: marquee-scroll 20s linear infinite;
+  }
 
-    /* Show clones ONLY on mobile to allow infinite scrolling */
-    .sponsor-img.is-clone {
-        display: block; 
-    }
+  .sponsor-img {
+    width: var(--logo-width-mobile);
+  }
 
-    @keyframes scroll-loop {
-        0% { transform: translateX(0); }
-        /* Move exactly -50% because we duplicated the logos once */
-        100% { transform: translateX(-50%); } 
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
     }
+    100% {
+      /* Move exactly half the width since we'll duplicate in HTML */
+      transform: translateX(-50%);
+    }
+  }
 }
-/* --- CAROUSEL CONTAINER --- */
+
+/* ==========================================
+   CAROUSEL SECTION
+   ========================================== */
 .carousel-section {
-    background: radial-gradient(circle at 50% 50%, #ba68c8 0%, #4a148c 100%);
-    padding: var(--space-xl) 0; position: relative; overflow: hidden;
-    display: flex; flex-direction: column; justify-content: center; min-height: 50vh;
-    /* Add perspective for 3D card tilts */
-    perspective: 1000px;
+  background: var(--carousel-gradient);
+  padding: var(--space-xl) 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 50vh;
+  perspective: 1000px;
 }
+
 .carousel-container {
-    display: flex; gap: var(--space-md); overflow-x: auto;
-    padding: var(--space-md) calc(50% - var(--card-width)/2);
-    scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: auto; z-index: 10;
-    /* Ensure 3D space is preserved */
-    transform-style: preserve-3d;
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding: var(--space-md) calc(50% - var(--card-width) / 2);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  scroll-behavior: auto;
+  z-index: 10;
+  transform-style: preserve-3d;
 }
-.carousel-container::-webkit-scrollbar { display: none; }
 
-/* --- THE PREMIUM CARD --- */
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* === CARD BASE STYLES === */
 .card {
-    flex: 0 0 var(--card-width); height: var(--card-height); border-radius: 24px;
-    position: relative; scroll-snap-align: center;
-    display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-md);
-    background-size: cover; background-position: center; overflow: hidden; 
-    
-    /* Cursor: Default arrow for side cards */
-    cursor: default; 
-    
-    /* Base State (Inactive) */
-    transform: scale(0.9) rotateY(0deg); /* Reset rotation */
-    transition: all 0.6s var(--ease-premium);
-    box-shadow: var(--shadow-base);
-    /* Important for smooth 3D effect */
-    backface-visibility: hidden; 
+  flex: 0 0 var(--card-width);
+  height: var(--card-height);
+  border-radius: var(--card-border-radius);
+  position: relative;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-md);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  cursor: default;
+  transform: scale(var(--card-scale-inactive)) rotateY(0deg);
+  transition: all var(--transition-slow) var(--ease-premium);
+  box-shadow: var(--shadow-base);
+  backface-visibility: hidden;
 }
 
-/* THE NEW "TINT" OVERLAY (Deep Purple Gradient, not yellow) */
+/* Purple tint overlay */
 .card::after {
-    content: '';
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    /* A rich, deep purple gradient veil */
-    background: linear-gradient(to bottom, rgba(74, 20, 140, 0.7), rgba(74, 20, 140, 0.9));
-    opacity: 1;
-    transition: opacity 0.6s var(--ease-premium);
-    z-index: 1;
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--card-tint);
+  opacity: 1;
+  transition: opacity var(--transition-slow) var(--ease-premium);
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* HOVER ON SIDE CARD (Playful Tilt) */
+/* Text gradient overlay */
+.card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--card-text-gradient);
+  z-index: 2;
+  pointer-events: none;
+  transition: var(--transition-slow) ease;
+}
+
+/* === CARD STATES === */
+/* Inactive hover */
 .card:not(.active):hover::after {
-    opacity: 0.2; /* Reveal most of the image, keep slight tint */
+  opacity: 0.2;
 }
+
 .card:not(.active):hover {
-    /* Slight 3D tilt towards viewer */
-    transform: scale(0.92) rotateY(-5deg);
-    z-index: 5;
-    cursor: pointer; /* Show hand to indicate it can be moved */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  transform: scale(var(--card-scale-hover)) rotateY(-5deg);
+  z-index: 5;
+  cursor: pointer;
+  box-shadow: var(--shadow-hover);
 }
 
-/* --- ACTIVE STATE (The Hero) --- */
+/* Active state */
 .card.active {
-    transform: scale(1.0) rotateY(0deg); 
-    /* PREMIUM GLOW SHADOW */
-    box-shadow: var(--shadow-premium);
-    z-index: 10;
-    border: 1px solid rgba(255,255,255,0.3); /* Brighter border */
-    /* Cursor: Hand for active card (Link) */
-    cursor: pointer;
+  transform: scale(var(--card-scale-active)) rotateY(0deg);
+  box-shadow: var(--shadow-premium);
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
 }
-/* Fully reveal image on active card */
-.card.active::after { opacity: 0; }
 
-/* Extra pop on hover for the active card */
+.card.active::after {
+  opacity: 0;
+}
+
+.card.active::before {
+  height: 70%;
+}
+
 .card.active:hover {
-     transform: scale(1.02);
+  transform: scale(var(--card-scale-active-hover));
 }
 
+/* === CARD TEXT === */
+.card h3 {
+  position: relative;
+  z-index: 3;
+  color: var(--white);
+  font-size: 2rem;
+  line-height: 0.9;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
 
-/* Text Overlay (Bottom gradient for readability) */
-.card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); z-index: 2; pointer-events: none; transition: 0.6s ease;}
-.card.active::before { height: 70%; /* Larger gradient on active */ }
+.card h3 span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
 
-.card h3 { position: relative; z-index: 3; color: white; font-size: 2rem; line-height: 0.9; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-.card h3 span { display: block; font-size: 0.9rem; font-weight: 600; letter-spacing: 2px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
+/* Card background images */
+.card-team {
+  background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+}
 
-.card-team { background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); }
-.card-events { background-image: url('https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); }
-.card-club { background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); }
+.card-events {
+  background-image: url('https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+}
 
-/* ARROWS (Punchier Hover) */
+.card-club {
+  background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+}
+
+/* === NAVIGATION ARROWS === */
 .nav-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 64px; height: 64px;
-    border-radius: 50%; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-    color: white; cursor: pointer; z-index: 20; 
-    transition: all 0.4s var(--ease-bounce); /* Bouncy transition */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  border-radius: 50%;
+  background: var(--arrow-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--arrow-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--white);
+  cursor: pointer;
+  z-index: 20;
+  transition: all var(--transition-medium) var(--ease-bounce);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-.nav-arrow:hover {
-    background: white; color: var(--purple-dark); 
-    transform: translateY(-50%) scale(1.15) rotate(0deg);
-    box-shadow: 0 0 40px rgba(255,255,255,0.5);
-}
-.nav-arrow:active { transform: translateY(-50%) scale(0.95); } /* Click feedback */
-.nav-left { left: var(--space-md); } .nav-right { right: var(--space-md); }
 
-/* --- CALENDAR --- */
+.nav-arrow:hover {
+  background: var(--white);
+  color: var(--color-primary-deep);
+  transform: translateY(-50%) scale(1.15) rotate(0deg);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+}
+
+.nav-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.nav-left { left: var(--space-md); }
+.nav-right { right: var(--space-md); }
+
+/* ==========================================
+   CALENDAR SECTION
+   ========================================== */
 .calendar-section {
-    background: var(--bg-light); padding: 80px 20px; 
-    text-align: center; position: relative; overflow: hidden;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--bg-light);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
+
 .calendar-content {
-    position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.deco-circle { position: absolute; border-radius: 50%; background: var(--purple-dark); opacity: 0.8; mix-blend-mode: multiply; }
+
+.calendar-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: var(--color-primary-deep);
+}
+
+.countdown-container {
+  background: var(--color-primary-deep);
+  border-radius: var(--countdown-radius);
+  padding: var(--countdown-padding);
+  display: inline-flex;
+  gap: var(--countdown-gap);
+  color: var(--white);
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow-premium);
+}
+
+.time-val {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.time-label {
+  font-size: 0.7rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  margin-top: 5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.calendar-link {
+  display: inline-block;
+  margin-top: 30px;
+  color: var(--color-primary-deep);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid transparent;
+  transition: border var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.calendar-link:hover {
+  border-bottom: 2px solid var(--color-primary-deep);
+}
+
+/* Decorative circles */
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-primary-deep);
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+}
+
 .c1 { width: 40px; height: 40px; top: 30px; left: 20px; }
 .c2 { width: 60px; height: 60px; top: 20px; right: 100px; }
 .c3 { width: 120px; height: 120px; bottom: -30px; left: -30px; }
 .c4 { width: 150px; height: 150px; top: 30%; right: -50px; opacity: 0.6; }
 
-.countdown-container {
-    background: var(--purple-dark); border-radius: 60px; padding: 25px 50px;
-    display: inline-flex; gap: 25px; color: white; position: relative; z-index: 2;
-    box-shadow: var(--shadow-premium);
-}
-.time-val { font-size: 1.8rem; font-weight: 800; }
-.time-label { font-size: 0.7rem; opacity: 0.9; text-transform: uppercase; margin-top: 5px; font-weight: 600; letter-spacing: 1px; }
-.calendar-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 30px; color: var(--purple-dark); }
-.calendar-link { display: inline-block; margin-top: 30px; color: var(--purple-dark); text-decoration: none; font-weight: 700; border-bottom: 2px solid transparent; transition: border 0.3s; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;}
-.calendar-link:hover { border-bottom: 2px solid var(--purple-dark); }
-
-/* --- BOTTOM BRANDS SECTION (Purple) --- */
-/* Fixed: added missing dot for class selector */
+/* ==========================================
+   BRANDS SECTION (Purple Bottom)
+   ========================================== */
 .brands-section-purple {
-    background-color: var(--purple-mid);
-    padding: 60px 20px 0 20px;
-    text-align: center;
-    color: white;
-    position: relative;
-    overflow: hidden; /* Ensures no horizontal scroll on main page */
+  background-color: var(--color-primary-deep);
+  padding: 60px 20px 0 20px;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
 }
 
 .brands-container {
-    max-width: 1200px; /* Increased to allow more items in one line */
-    margin: 0 auto;
-    margin-bottom: 40px;
-    overflow: hidden; /* Essential for the marquee effect */
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  overflow: hidden;
 }
 
 .brands-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    opacity: 0.9;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  opacity: 0.9;
 }
 
 .brands-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap; /* FORCED SINGLE LINE ON DESKTOP */
-    gap: 60px;
-    margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  gap: var(--logo-gap-desktop);
+  margin-bottom: 50px;
 }
 
 .brands-row img {
-    width: 120px; 
-    height: auto;
-    object-fit: contain;
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    mix-blend-mode: normal;
-    flex: 0 0 auto; /* PREVENTS LOGOS FROM SQUASHING */
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: var(--logo-width-desktop);
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: all var(--transition-medium) var(--ease-smooth);
 }
 
 .brands-row img:hover {
-    filter: brightness(1) invert(0) opacity(1);
-    transform: scale(1.1) translateY(-5px);
+  transform: scale(1.1) translateY(-5px);
 }
 
-/* --- RESPONSIVE / MOBILE MARQUEE ANIMATION --- */
-@media (max-width: 1024px) { /* Increased breakpoint to keep laptop views in one line via marquee */
-    .brands-row {
-        justify-content: flex-start; /* Start from left for smooth scroll */
-        width: max-content; 
-        animation: marquee-scroll 15s linear infinite; /* Slightly slower for better readability */
-        padding: 10px 0;
-        transform: translate3d(0, 0, 0); 
-    }
-    
-    .brands-row:hover, 
-    .brands-row:active {
-        animation-play-state: paused;
-    }
-
-    .brands-row img {
-        width: 100px;
-    }
+/* Desktop: centered static row */
+@media (min-width: 1025px) {
+  .brands-row {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
-@keyframes marquee-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } 
+/* Tablet/Mobile: infinite marquee */
+@media (max-width: 1024px) {
+  .brands-row {
+    width: max-content;
+    animation: marquee-scroll 25s linear infinite;
+  }
+
+  .brands-row img {
+    width: var(--logo-width-mobile);
+  }
 }
-/* --- PARALLAX BUBBLES --- */
 
-/* --- UPDATED PARALLAX BUBBLES --- */
-
+/* ==========================================
+   PARALLAX BUBBLES
+   ========================================== */
 .parallax-bubble {
-    position: absolute;
-    border-radius: 50%;
-    /* FIX 1: Send strictly behind content */
-    z-index: 0; 
-    pointer-events: none; /* Keeps clicks working for links behind them */
-    
-    /* FIX 2: Smoother movement */
-    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform; 
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  transition: transform 0.1s var(--ease-smooth);
+  will-change: transform;
 }
 
-/* Add a "pop" transition for when they grow */
 .parallax-bubble.pop {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  transition: transform var(--transition-fast) var(--ease-bounce);
 }
-
-/* --- SECTION LAYOUT FIX --- */
-
-/* Add relative positioning so bubbles stay inside their sections */
-.calendar-section {
-    position: relative;
-    overflow: hidden;
-    background-color: var(--bg-light); 
-    z-index: 1;
-}
-
-
-/* Ensure content sits ON TOP of bubbles */
-.calendar-content, 
-.trust-bar {
-    position: relative;
-    /* FIX 4: Higher z-index than bubbles */
-    z-index: 10; 
-}
-
-/* --- COLORS & OPACITY FIX --- */
 
 .bubble-dark {
-    background-color: var(--purple-dark);
-    /* FIX 5: Very low opacity so text is readable */
-    opacity: 0.08; 
+  background-color: var(--color-primary-deep);
+  opacity: var(--bubble-opacity-dark);
 }
 
 .bubble-light {
-    background-color: #e1bee7; 
-    /* FIX 6: Low opacity for the dark section */
-    opacity: 0.1; 
+  background-color: #e1bee7;
+  opacity: var(--bubble-opacity-light);
 }
 
-/* --- RESPONSIVE POSITIONS (Laptop Friendly) --- */
-/* We use percentages (%) instead of pixels so they fit any screen */
+/* Bubble positions */
+.b-top-right { width: 300px; height: 300px; top: -50px; right: -50px; }
+.b-bottom-left { width: 400px; height: 400px; bottom: -100px; left: -100px; }
+.b-center-mini { width: 80px; height: 80px; top: 15%; right: 20%; }
+.b-top-left { width: 250px; height: 250px; top: -80px; left: -50px; }
+.b-bottom-right { width: 350px; height: 350px; bottom: -100px; right: -50px; }
 
-.b-top-right {
-    width: 300px; height: 300px;
-    top: -50px; right: -50px;
-}
-
-.b-bottom-left {
-    width: 400px; height: 400px;
-    bottom: -100px; left: -100px;
-}
-
-.b-center-mini {
-    width: 80px; height: 80px;
-    top: 15%; right: 20%;
-}
-
-.b-top-left {
-    width: 250px; height: 250px;
-    top: -80px; left: -50px;
-}
-
-.b-bottom-right {
-    width: 350px; height: 350px;
-    bottom: -100px; right: -50px;
-}
-
+/* ==========================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================== */
 @media (min-width: 1024px) {
-    .nav-left { left: var(--space-xl); } .nav-right { right: var(--space-xl); }
-    .card h3 { font-size: 3rem; } .card h3 span { font-size: 1.1rem; }
-    .time-val { font-size: 3rem; }
+  .nav-left { left: var(--space-xl); }
+  .nav-right { right: var(--space-xl); }
+  
+  .card h3 { font-size: 3rem; }
+  .card h3 span { font-size: 1.1rem; }
+  
+  .time-val { font-size: 3rem; }
 }
 
-@media (min-width: 1024px) {
-    .nav-left { left: var(--space-xl); } .nav-right { right: var(--space-xl); }
-    .card h3 { font-size: 3rem; } .card h3 span { font-size: 1.1rem; }
-    .time-val { font-size: 3rem; }
-}
-
-/* =========================================
-   MOBILE FIX: CALENDAR & COUNTDOWN
-   ========================================= */
-
+/* Mobile fixes */
 @media (max-width: 768px) {
-    
-    /* 1. Adjust Section Spacing */
-    .calendar-section {
-        padding: 60px 20px; /* Reduce massive padding */
-    }
+  .calendar-section {
+    padding: 60px 20px;
+  }
 
-    /* 2. TRANSFORM THE COUNTDOWN TO 2x2 GRID */
-    .countdown-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two items per row */
-        gap: 20px 10px; /* 20px vertical gap, 10px horizontal gap */
-        padding: 30px 20px;
-        width: 100%;
-        max-width: 340px; /* Prevents it from getting too wide */
-        border-radius: 30px; /* Slightly less rounded */
-        justify-items: center; /* Center content in grid cells */
-    }
+  .countdown-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 10px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 340px;
+    border-radius: 30px;
+    justify-items: center;
+  }
 
-    /* 3. HIDE THE COLONS (:) */
-    /* In a grid layout, the colons look weird. We hide them. */
-    /* Since your colons are distinct .time-unit divs (evens), we hide evens */
-    .countdown-container .time-unit:nth-child(even) {
-        display: none;
-    }
+  /* Hide colons in grid layout */
+  .countdown-container .time-unit:nth-child(even) {
+    display: none;
+  }
 
-    /* 4. STYLE THE TIME UNITS */
-    .time-unit {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+  .time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-    /* Keep numbers big and punchy */
-    .time-val {
-        font-size: 2.2rem; 
-        line-height: 1;
-        margin-bottom: 5px;
-    }
+  .time-val {
+    font-size: 2.2rem;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
 
-    .time-label {
-        font-size: 0.75rem;
-        opacity: 0.8;
-    }
-    
-    /* 5. FIX PARALLAX BUBBLES ON MOBILE */
-    /* They are currently huge (300px) and will cover the text on phones */
-    .parallax-bubble {
-        transform: scale(0.5); /* Shrink them to 50% size */
-        opacity: 0.05; /* Make them even more subtle so text is readable */
-    }
-    
-    /* Specific positioning adjustments for mobile so they don't overlap faces/text */
-    .b-top-right { top: -20px; right: -80px; }
-    .b-bottom-left { bottom: -50px; left: -80px; }
-    
-    /* 6. TITLE SIZE */
-    .calendar-title {
-        font-size: 1.3rem;
-        margin-bottom: 20px;
-    }
+  .time-label {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .calendar-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  /* Shrink bubbles on mobile */
+  .parallax-bubble {
+    transform: scale(0.5);
+    opacity: var(--bubble-opacity-mobile);
+  }
+
+  .b-top-right { top: -20px; right: -80px; }
+  .b-bottom-left { bottom: -50px; left: -80px; }
 }

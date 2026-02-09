@@ -11,7 +11,7 @@
 }
 
 .navbar { width: 100%; display: flex; justify-content: space-between; padding: 15px 20px; position: relative; z-index: 10; }
-.search-bar-container { background: var(--purple-dark); border-radius: 20px; padding: 10px 20px; display: flex; align-items: center; }
+.search-bar-container { background: var(--color-primary-deep); border-radius: 20px; padding: 10px 20px; display: flex; align-items: center; }
 .hamburger { color: white; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
 
 .hero-content {
@@ -75,7 +75,7 @@
 
 footer { 
     /* CHANGED: Use the deep brand purple variable */
-    background: var(--purple-mid); 
+    background: var(--color-primary-deep); 
     color: var(--brand-pale); /* Use pale lilac for text instead of pure white */
     padding: var(--space-lg) var(--space-md); 
     font-size: 0.9rem; 

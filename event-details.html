@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details | SpeakUP</title>
+    <link rel="icon" type="image/jpeg" href="assets/logo/speakup_logo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages/event-details.css"> 
+</head>
+<body>
+    
+    <div class="fullscreen-menu" id="navMenu"></div>
+    
+    <header class="hero-section small-hero" style="height: 40vh; min-height: 300px;"></header>
+
+    <main class="event-details-container">
+        <a href="events.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> <span>Back to Events</span>
+        </a>
+
+        <div class="event-layout">
+            <div class="event-main">
+                <span class="event-category" id="detailCategory">Loading...</span>
+                <h1 class="event-title" id="detailTitle">...</h1>
+                
+                <div class="event-image-wrapper">
+                    <img id="detailImage" src="" alt="Event Cover">
+                </div>
+
+                <div class="event-description" id="detailDescription">
+                    </div>
+
+                <div class="event-highlights">
+                    <h3>What to Expect</h3>
+                    <ul id="detailHighlights"></ul>
+                </div>
+            </div>
+
+            <aside class="event-sidebar">
+                <div class="sidebar-card">
+                    <h3>Event Info</h3>
+                    
+                    <div class="info-row">
+                        <div class="icon-box"><i class="far fa-calendar-alt"></i></div>
+                        <div class="info-text">
+                            <strong>Date</strong>
+                            <span id="sidebarDate">...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="icon-box"><i class="far fa-clock"></i></div>
+                        <div class="info-text">
+                            <strong>Time</strong>
+                            <span id="sidebarTime">...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-text">
+                            <strong>Location</strong>
+                            <span id="sidebarLocation">...</span>
+                        </div>
+                    </div>
+
+                    <a href="#" id="registerBtn" target="_blank" class="register-btn">
+                        <span>Save Your Spot</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3>Speakers</h3>
+                    <ul id="sidebarSpeakers" class="speakers-list"></ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="js/data/navigation.js"></script>
+    <script src="js/data/events.js"></script>
+    
+    <script src="js/components/header.js"></script>
+    <script src="js/components/overlay.js"></script>
+    <script src="js/components/footer.js"></script>
+    <script src="js/global.js"></script>
+    
+    <script src="js/pages/event-details.js"></script>
+</body>
+</html>
