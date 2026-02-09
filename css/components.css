@@ -545,7 +545,9 @@
 
 /* 2. Hover State (Full Color & Focus) */
 .sponsors-track img:hover,
-.brands-row img:hover {
+.sponsors-track img:active,
+.brands-row img:hover,
+.brands-row img:active {
     /* Restore full color */
     filter: grayscale(0%);
     
