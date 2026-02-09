@@ -18,6 +18,7 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100vh; /* Use 100vh to ensure full screen cover */
+    height: 100dvh; /* Dynamic viewport height for mobile */
     z-index: 99999; /* Higher than everything */
     pointer-events: none; /* Allows clicks to pass through when hidden */
     display: flex;
