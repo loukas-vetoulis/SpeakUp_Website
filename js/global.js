@@ -16,6 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof FooterComponent !== 'undefined' && footerContainer) {
         footerContainer.innerHTML = FooterComponent.render();
     }
+    // =========================================
+    // 1b. BLOG RENDERING LOGIC
+    // =========================================
+    const blogGrid = document.getElementById('blogGrid');
+    
+    // Check if we are on the Blog page and have data
+    if (blogGrid && typeof blogData !== 'undefined' && typeof BlogComponent !== 'undefined') {
+        // We pass the blogData array into the render function
+        blogGrid.innerHTML = BlogComponent.render(blogData);
+    }
 
     // =========================================
     // 2. MENU TOGGLE LOGIC

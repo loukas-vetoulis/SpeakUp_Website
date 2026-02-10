@@ -2,7 +2,6 @@
 @import 'base.css';
 @import 'layout.css';
 @import 'components.css';
-@import 'events.css';
 
 /* Forces numbers to be monospaced so they don't jitter */
 .time-val {
