@@ -148,7 +148,7 @@ function initCountdown() {
         if (titleEl) titleEl.innerText = `NEXT EVENT: ${nextEvent.title.toUpperCase()}`;
         
         const linkEl = document.querySelector('.calendar-link');
-        if (linkEl) linkEl.href = nextEvent.link;
+        if (linkEl) linkEl.href = `event-details.html?id=${nextEvent.id}`; 
 
         const diff = nextEvent.fullDate - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
