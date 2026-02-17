@@ -10,7 +10,7 @@ const EVENTS_DATA = [
         location: "AUEB TROIAS BUILDING 101-102",
         status: "Completed",
         // Using the image you provided
-        image: "https://instagram.fath6-1.fna.fbcdn.net/v/t51.82787-15/589835676_17868729204483147_2846819987071307621_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ig_cache_key=Mzc4MDgwNDU0NDI1NTgzNDI0Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=l-E77JglUHAQ7kNvwEsrH35&_nc_oc=AdlQWVL6B7PyRFgBDKKD8c_d5gx_sT_UpZvypqNTJfrbF-F1rWxIdTok4w-1aDQvozo&_nc_ad=z-m&_nc_cid=1127&_nc_zt=23&_nc_ht=instagram.fath6-1.fna&_nc_gid=bC8lB5m9Zlus5lgoZc1bog&oh=00_AfvJoWhLE0uRZMGyQIW0BHRk8HNQkAepUwkZZGqYT0ps4Q&oe=698D4092",
+        image: "assets/thumbnails/uni_students.jpg",
         
         description: `
             <p>How do you sell a startup idea in under 60 seconds? In our third event, SpeakUP joined forces with the UniStudents team to master the art of the Elevator Pitch.</p>
@@ -38,7 +38,7 @@ const EVENTS_DATA = [
         time: "18:00 - 20:00",
         location: "47 Evelpidon, Athens 113 62",
         status: "Completed",
-        image: "https://instagram.fath6-1.fna.fbcdn.net/v/t51.82787-15/582908201_17866467300483147_5345764339498497683_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ig_cache_key=Mzc2NDg0MjcxNDI3NDU4NzUwNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=HsE5dwEFNZQQ7kNvwEGmHZ3&_nc_oc=AdnAcBeoo6yupNpP4qSf3GJC2r-Oh82w_S7X_6wDeNOvXnewr71pKIQdkdW5KPydx18&_nc_ad=z-m&_nc_cid=1127&_nc_zt=23&_nc_ht=instagram.fath6-1.fna&_nc_gid=tjz8BMiGOc6-ycDo2mLJ9g&oh=00_AfvFMTLB5atoIRIXpER-qG3vYTo1-j3nClyCXLjwRdAKtQ&oe=698D4E6C",
+        image: "assets/thumbnails/kintzios.jpg",
         
         description: `
             <p>Communication isn't just about how you speak to others; it’s about the internal dialogue you have with yourself.</p>
@@ -53,5 +53,35 @@ const EVENTS_DATA = [
             "Interactive Discussion",
             "Community Networking"
         ]
-    }
+    },
+    {
+        id: 3,
+        category: "WORKSHOP",
+        title: "Negotiation Skills & Deal Strategy",
+        date: "27",
+        month: "FEB",
+        year: 2026,
+        time: "18:00 - 21:00",
+        location: "AUEB TROIAS BUILDING 201-202",
+        status: "Open",
+        image: "assets/thumbnails/negotiations.jpg",
+
+        description: `
+            <p>Negotiations are not talent — they are a toolkit of skills.</p>
+            <p>In this next SpeakUP event, we enter the world of negotiation thinking, deals, and strategy, launching our collaboration with <strong>Mercury Negotiation Academy (MNA)</strong>.</p>
+            <p>Join a unique learning experience led by expert speakers with multidimensional professional experience.</p>
+            <p>If you want to learn how to develop and apply your negotiation skills to close successful agreements, this session is for you.</p>
+        `,
+        speakers: [
+            { name: "Pantelis Nikolopoulos", role: "Co-founder, MNA" },
+            { name: "Maria Andrikopoulou", role: "Head of Education Team, MNA" },
+            { name: "Antonis Petris", role: "Member of Education Team, MNA" }
+        ],
+        highlights: [
+            "Negotiation Thinking Frameworks",
+            "Deals and Strategy in Practice",
+            "Applied Skill Development"
+        ],
+        registration_link: "https://docs.google.com/forms/d/e/1FAIpQLScSeJ77MbL-g2g-EVp2RHGCDGZxJG2QHGCh8r2rYgcLIJ_RUg/viewform"
+    },
 ];
