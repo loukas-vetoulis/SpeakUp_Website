@@ -5,13 +5,24 @@ window.addEventListener('load', () => {
 
     if (slider && typeof CAROUSEL_DATA !== 'undefined') {
         // Generate Cards
-        CAROUSEL_DATA.forEach(item => {
+       CAROUSEL_DATA.forEach(item => {
             const card = document.createElement('div');
+            
+            // 1. Keep class assignment
             card.className = `card card-${item.type}`;
+            
+            // 2. Set the URL data attribute
             card.setAttribute('data-url', item.url);
+            
+            // 3. THIS IS NEW: Apply the background image from data
+            if (item.image) {
+                card.style.backgroundImage = `url('${item.image}')`;
+            }
+
             card.innerHTML = `<h3><span>${item.title}</span> ${item.highlight}</h3>`;
             slider.appendChild(card);
         });
+        
         
         initInfiniteScroll(slider, btnLeft, btnRight);
     }
