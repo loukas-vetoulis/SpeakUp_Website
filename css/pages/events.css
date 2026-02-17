@@ -15,16 +15,6 @@
     min-height: 100vh;
 }
 
-/* iPhone/mobile */
-@media (max-width: 991px) {
-  .events-page-section {
-    background-attachment: scroll; /* required for iOS quality */
-    background-image: image-set(
-      url("../../assets/backgrounds/Speakup_BG.jpg") 1x,
-      url("../../assets/backgrounds/Speakup_BG@2x.jpg") 2x
-    );
-  }
-}
 
 .page-header {
     text-align: center;
@@ -45,6 +35,21 @@
 .page-subtitle {
     color: var(--brand-lilac);
     font-size: 1.1rem;
+}
+
+/* iPhone/mobile */
+@media (max-width: 991px) {
+  .events-page-section {
+    background-attachment: scroll; /* required for iOS quality */
+    background-image: none;         /* remove Speakup_BG.jpg on mobile */
+    background-color: var(--brand-lilac); /* fallback solid color */
+  }
+  .page-title{
+    color: var(--color-primary-deep);
+  }
+  .page-subtitle{
+    color: var(--color-primary-deep);
+  }
 }
 
 /* --- THE GRID --- */
