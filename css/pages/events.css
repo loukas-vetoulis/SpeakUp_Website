@@ -15,6 +15,17 @@
     min-height: 100vh;
 }
 
+/* iPhone/mobile */
+@media (max-width: 991px) {
+  .events-page-section {
+    background-attachment: scroll; /* required for iOS quality */
+    background-image: image-set(
+      url("../../assets/backgrounds/Speakup_BG.jpg") 1x,
+      url("../../assets/backgrounds/Speakup_BG@2x.jpg") 2x
+    );
+  }
+}
+
 .page-header {
     text-align: center;
     margin-bottom: 60px;

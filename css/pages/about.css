@@ -74,6 +74,17 @@
     text-align: center;
 }
 
+/* iPhone/mobile */
+@media (max-width: 991px) {
+  .team-section {
+    background-attachment: scroll; /* required for iOS quality */
+    background-image: image-set(
+      url("../../assets/backgrounds/Speakup_BG.jpg") 1x,
+      url("../../assets/backgrounds/Speakup_BG@2x.jpg") 2x
+    );
+  }
+}
+
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
