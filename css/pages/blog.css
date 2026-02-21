@@ -233,9 +233,9 @@
   .blog-main-title{
     color: var(--color-primary-deep);
   }
-   .purple-accent{
+   /* .purple-accent{
     color: var(--color-primary-deep);
-  }
+  } */
   .blog-subtitle{
     color: var(--color-primary-deep);
   }
