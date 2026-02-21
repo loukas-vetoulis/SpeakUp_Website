@@ -2,7 +2,7 @@
 .blog-up-section {
     padding: 80px 20px;
     max-width: 1200px;
-    margin: -60px auto 60px; /* Pulls content up over the small hero like your event details */
+    margin: -60px auto 60px;
     position: relative;
     z-index: 10;
 }
@@ -81,11 +81,61 @@
     color: #1a1a1a;
 }
 
+/* --- EXPANDABLE CONTENT LOGIC --- */
+.expandable-wrapper {
+    max-height: 100px; /* Adjust this to show exactly the amount of excerpt you want initially */
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    margin-bottom: 15px;
+}
+
+/* Optional fade effect at the bottom when collapsed */
+.expandable-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(transparent, white);
+    transition: opacity 0.3s ease;
+}
+
+.blog-card.is-expanded .expandable-wrapper {
+    max-height: 2000px; /* Large enough to fit the full content */
+}
+
+.blog-card.is-expanded .expandable-wrapper::after {
+    opacity: 0; /* Hide the fade effect when expanded */
+    pointer-events: none;
+}
+
 .blog-excerpt {
     font-size: 1rem;
     line-height: 1.6;
     color: #444;
     margin-bottom: 25px;
+}
+
+/* --- READ MORE BUTTON --- */
+.read-more-btn {
+    background: transparent;
+    border: 2px solid var(--brand-red, #ff0000);
+    color: var(--brand-red, #ff0000);
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    display: inline-block;
+}
+
+.read-more-btn:hover {
+    background: var(--brand-red, #ff0000);
+    color: white;
 }
 
 /* --- HIGHLIGHTS LIST --- */
@@ -105,7 +155,7 @@
 }
 
 .blog-highlights li::before {
-    content: "\f00c"; /* FontAwesome Check */
+    content: "\f00c"; 
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     position: absolute;

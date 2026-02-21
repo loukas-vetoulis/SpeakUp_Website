@@ -1,10 +1,10 @@
 const CAROUSEL_DATA = [
-    { 
-        title: 'welcome',     
-        highlight: 'HOME',      
-        url: 'index.html',
-        image: 'assets/carousel/home_photo.jpg'
-    },
+    // { 
+    //     title: 'welcome',     
+    //     highlight: 'HOME',      
+    //     url: 'index.html',
+    //     image: 'assets/carousel/home_photo.jpg'
+    // },
     { 
         title: 'upcoming',    
         highlight: 'EVENTS',    

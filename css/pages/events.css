@@ -41,8 +41,8 @@
 @media (max-width: 991px) {
   .events-page-section {
     background-attachment: scroll; /* required for iOS quality */
-    background-image: none;         /* remove Speakup_BG.jpg on mobile */
-    background-color: var(--brand-lilac); /* fallback solid color */
+    background-image: none;         
+    background-color: var(--brand-lilac); 
   }
   .page-title{
     color: var(--color-primary-deep);

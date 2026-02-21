@@ -23,10 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Check if we are on the Blog page and have data
     if (blogGrid && typeof blogData !== 'undefined' && typeof BlogComponent !== 'undefined') {
-        // We pass the blogData array into the render function
+        // 1. Inject the HTML components first
         blogGrid.innerHTML = BlogComponent.render(blogData);
-    }
 
+        // 2. Initialize animations now that cards exist in the DOM
+        if (typeof initBlogAnimations === 'function') {
+            initBlogAnimations();
+        }
+
+        // 3. Initialize the Read More toggle functionality
+        if (typeof initReadMore === 'function') {
+            initReadMore();
+        }
+    }
     // =========================================
     // 2. MENU TOGGLE LOGIC
     // =========================================
