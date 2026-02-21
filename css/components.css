@@ -72,24 +72,33 @@
    CAROUSEL SECTION
    ========================================== */
 .carousel-section {
-  background-color: var(--bg-light); 
+    background-color: var(--bg-light); 
     background-image: url('../assets/backgrounds/Speakup_BG.jpg');
-    
-    /* Critical Scaling Properties */
     background-repeat: no-repeat;
-    background-size: cover; /* Ensures the image fills the section */
-    background-position: center center; /* Keeps the focal point central */
-    
-    /* Optional: Fixed background for a parallax effect */
+    background-size: cover; 
+    background-position: center center; 
     background-attachment: fixed;
-  padding: var(--space-xl) 0;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 50vh;
-  perspective: 1000px;
+    padding: var(--space-xl) 0;
+    position: relative; /* Crucial for absolute positioning of the pseudo-element */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 50vh;
+    perspective: 1000px;
+}
+
+/* The Fade Transition Layer */
+.carousel-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px; /* Controls how tall the fade effect is */
+    background: linear-gradient(to bottom, transparent 0%, var(--brand-lilac) 100%);
+    pointer-events: none; /* Ensures users can still swipe/click the carousel */
+    z-index: 2; /* Ensure this sits above the background but below your text */
 }
 
 /* iPhone/mobile */

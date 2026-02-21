@@ -73,6 +73,12 @@
 }
 .logo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
 
+.logo-placeholder a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .hero-text h2 { font-size: 1rem; margin: 0 auto; max-width: 300px; font-weight: 600; line-height: 1.4; }
 
 /* FIX: Icon Hovering */

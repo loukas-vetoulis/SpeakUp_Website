@@ -1,10 +1,18 @@
 /* --- BLOG UP SECTION LAYOUT --- */
 .blog-up-section {
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: -60px auto 60px;
-    position: relative;
-    z-index: 10;
+    padding: var(--space-xl) var(--space-md);
+    /* Fallback color + Image path */
+    background-color: var(--bg-light); 
+    background-image: url('../../assets/backgrounds/Speakup_BG.jpg');
+    
+    /* Critical Scaling Properties */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the image fills the section */
+    background-position: center center; /* Keeps the focal point central */
+    
+    /* Optional: Fixed background for a parallax effect */
+    background-attachment: fixed; 
+    min-height: 100vh;
 }
 
 .section-header {
@@ -15,7 +23,7 @@
 .blog-main-title {
     font-size: 3rem;
     font-weight: 800;
-    color: var(--brand-dark); 
+    color: var(--brand-lilac); 
     margin-bottom: 10px;
     letter-spacing: -1px;
 }
@@ -26,7 +34,7 @@
 
 .blog-subtitle {
     font-size: 1.1rem;
-    color: #666;
+    color: var(--brand-lilac);
     font-weight: 500;
 }
 
@@ -214,3 +222,25 @@
         padding: 30px;
     }
 }
+
+@media (max-width: 991px) {
+  .blog-up-section {
+    background-attachment: scroll; /* required for iOS quality */
+    background-image: none;         
+    background-color: var(--brand-lilac); 
+  }
+
+  .blog-main-title{
+    color: var(--color-primary-deep);
+  }
+   .purple-accent{
+    color: var(--color-primary-deep);
+  }
+  .blog-subtitle{
+    color: var(--color-primary-deep);
+  }
+
+
+
+}
+

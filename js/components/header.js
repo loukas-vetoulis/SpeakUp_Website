@@ -21,8 +21,8 @@ const HeaderComponent = {
 
         <div class="hero-content">
             <div class="logo-container">
-                <div class="logo-placeholder">
-                    <a href="index.html" id="logo-link">
+                <div class="logo-container">
+                    <a href="index.html" class="logo-placeholder" id="logo-link">
                         <img src="assets/logo/speakup_logo.jpeg" alt="SpeakUp Logo">
                     </a>
                 </div>
