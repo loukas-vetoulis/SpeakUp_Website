@@ -574,3 +574,13 @@
     /* Optional: Add a subtle drop shadow to lift it off the page */
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
 }
+
+.brands-row img.logo-yum {
+  width: calc(var(--logo-width-desktop) * 0.5);
+}
+
+@media (max-width: 1024px) {
+  .brands-row img.logo-yum {
+    width: calc(var(--logo-width-mobile) * 0.5);
+  }
+}
