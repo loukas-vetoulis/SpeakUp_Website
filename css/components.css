@@ -3,17 +3,20 @@
    ========================================== */
 .sponsors-bar {
   background: var(--brand-pale);
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: 80px; /* SET A HARD HEIGHT */
   width: 100%;
   overflow: hidden;
   position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-
 .sponsors-track {
   display: flex;
   align-items: center;
   gap: var(--logo-gap-desktop);
+  width: max-content; /* Vital for marquee */
+  animation: marquee-scroll 30s linear infinite; /* Enable for ALL sizes */
 }
 
 .sponsor-img {
@@ -36,7 +39,11 @@
     max-width: 1200px;
     margin: 0 auto;
     justify-content: center;
-    flex-wrap: wrap;
+    /* CHANGE THIS: Prevent wrapping to keep height fixed */
+    flex-wrap: nowrap; 
+    /* ADD THIS: Allow logos to shrink slightly if they exceed 1200px, 
+       or use 'overflow-x: auto' if you prefer a scrollbar */
+    overflow: hidden; 
   }
 }
 
