@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (typeof FooterComponent !== 'undefined' && footerContainer) {
         footerContainer.innerHTML = FooterComponent.render();
+        FooterComponent.bindEvents();
     }
     // =========================================
     // 1b. BLOG RENDERING LOGIC
