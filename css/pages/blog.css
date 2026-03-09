@@ -111,7 +111,7 @@
 }
 
 .blog-card.is-expanded .expandable-wrapper {
-    max-height: 2000px; /* Large enough to fit the full content */
+    max-height: 6000px; /* Large enough to fit the full content */
 }
 
 .blog-card.is-expanded .expandable-wrapper::after {
