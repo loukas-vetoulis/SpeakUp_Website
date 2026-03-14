@@ -63,7 +63,7 @@ const EVENTS_DATA = [
         year: 2026,
         time: "18:00 - 21:00",
         location: "AUEB TROIAS BUILDING 201-202",
-        status: "Open",
+        status: "Completed",
         image: "assets/thumbnails/negotiations.jpg",
 
         description: `
@@ -84,4 +84,32 @@ const EVENTS_DATA = [
         ],
         registration_link: "https://docs.google.com/forms/d/e/1FAIpQLScSeJ77MbL-g2g-EVp2RHGCDGZxJG2QHGCh8r2rYgcLIJ_RUg/viewform"
     },
+    {
+        id: 4,
+        category: "KEYNOTE",
+        title: "Interview Performance & Professional Presence",
+        date: "19",
+        month: "MAR",
+        year: 2026,
+        time: "18:00 - 21:00",
+        location: "AUEB TROIAS BUILDING 201-202",
+        status: "Upcoming",
+        image: "assets/thumbnails/ICCpwc.PNG",
+        description: `
+            <p>Interviews are not just a conversation — they are a strategic bridge to your career.</p>
+            <p>In this next SpeakUP event, we dive deep into the art of interview performance and professional presence, launching our collaboration with PwC Greece.</p>
+            <p>Join a unique learning experience led by senior recruiters and career experts with extensive experience in scouting top-tier talent.</p>
+            <p>If you want to master the skills needed to communicate your value effectively and navigate the modern recruitment landscape with confidence, this keynote session is for you.</p>
+        `,
+        speakers: [
+            { name: "Sofi Kleitsa", role: "Speaker" },
+            { name: "Varvara Mantzouranaki", role: "Speaker" }
+        ],
+        highlights: [
+            "Interview Performance",
+            "Professional Presence",
+            "Navigating Recruitment"
+        ],
+        registration_link: "https://docs.google.com/forms/d/e/1FAIpQLSfUUv8NKp_cB1eszdN_Ze9Se8bIROj7NC_rr95fcGumDrjeSw/viewform?usp=sharing&ouid=103392271645623493544"
+    }
 ];
