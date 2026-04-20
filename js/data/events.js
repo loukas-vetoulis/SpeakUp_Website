@@ -93,7 +93,7 @@ const EVENTS_DATA = [
         year: 2026,
         time: "18:00 - 21:00",
         location: "AUEB TROIAS BUILDING 201-202",
-        status: "Upcoming",
+        status: "Completed",
         image: "assets/thumbnails/ICCpwc.PNG",
         description: `
             <p>Interviews are not just a conversation — they are a strategic bridge to your career.</p>
@@ -111,5 +111,33 @@ const EVENTS_DATA = [
             "Navigating Recruitment"
         ],
         registration_link: "https://docs.google.com/forms/d/e/1FAIpQLSfUUv8NKp_cB1eszdN_Ze9Se8bIROj7NC_rr95fcGumDrjeSw/viewform?usp=sharing&ouid=103392271645623493544"
+    },
+    {
+        id: 5,
+        category: "KEYNOTE",
+        title: "Stage Presence: Command the Room, Lead the Conversation",
+        date: "24",
+        month: "APR",
+        year: 2026,
+        time: "18:00 - 21:00",
+        location: "AUEB TROIAS BUILDING 102",
+        status: "Upcoming",
+        image: "assets/thumbnails/SP.png",
+        description: `
+            <p>Public speaking and professional standing are not just about what you say; they are about how you inhabit the space and hold your audience's attention.</p>
+            <p>In this upcoming SpeakUP event, we explore the art of Stage Presence and the power of impactful communication. We are honored to host a high-level discussion with two of the most influential figures in the Greek maritime and exhibition sectors: <strong>Mr. Theodore Vokos</strong> (Managing Director, Posidonia Exhibitions) and <strong>Ms. Danae Bezantakou</strong> (CEO, Navigator Shipping Consultants &amp; Founder, YES Forum).</p>
+            <p>Join us for a unique keynote session where industry leaders share their secrets on how to project confidence, influence stakeholders, and master the "stage" — whether that is a boardroom, a podium, or a global summit.</p>
+            <p>If you want to move beyond simple presenting and start truly commanding the room, this session is for you.</p>
+        `,
+        speakers: [
+            { name: "Theodore Vokos", role: "Managing Director, Posidonia Exhibitions" },
+            { name: "Danae Bezantakou", role: "CEO, Navigator Shipping Consultants & Founder, YES Forum" }
+        ],
+        highlights: [
+            "The Power of Presence",
+            "Body Language & Delivery",
+            "Leadership Communication",
+            "Confidence Under Pressure"
+        ]
     }
 ];
